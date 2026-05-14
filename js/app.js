@@ -120,7 +120,7 @@ function renderDetail(id) {
   body.appendChild(makeSection('🎯', `Ejercicio: ${c.exercise.title}`, `<ol class="steps-list">${stepsHtml}</ol>`));
 
   const isDone = explored.has(id);
-  const btn = el('button', `cta-btn${isDone ? ' done' : ''}`, isDone ? '✓ Ya lo practicaste' : '✦ ¡Lo voy a practicar!');
+  const btn = el('button', `cta-btn${isDone ? ' done' : ''}`, isDone ? 'Ya lo practicaste' : '¡Lo voy a practicar!');
 
   if (!isDone) {
     btn.style.cssText = `background:${c.color};box-shadow:0 4px 18px ${c.color}55`;
