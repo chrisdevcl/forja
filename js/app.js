@@ -57,10 +57,11 @@ function renderHome() {
             <span class="progress-count">${explored.size} / ${CONCEPTS.length}</span>
           </div>
           <div class="progress-track">
-            <div class="progress-fill" style="width:${pct}%"></div>
+            <div class="progress-fill" id="progress-fill"></div>
           </div>
         </div>
       </div>`;
+    document.getElementById('progress-fill').style.width = pct + '%';
   }
 
   const grid = el('div', 'grid');
@@ -127,9 +128,9 @@ function renderDetail(id) {
     btn.addEventListener('click', () => {
       explored.add(id);
       btn.className   = 'cta-btn done';
-      btn.textContent = '✓ Ya lo practicaste';
+      btn.textContent = 'Ya lo practicaste';
       btn.style.cssText = '';
-      showToast(`🔥 ¡${c.title} forjada!`);
+      showToast(`🔥 ¡${c.title} forjada! 🔥`);
     });
   }
 
