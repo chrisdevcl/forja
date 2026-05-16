@@ -9,21 +9,21 @@ body {
   font-family: 'Nunito', sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 #app {
   width: 100%;
   min-height: 100vh;
   background: #F7F6F2;
+  overflow-x: hidden;
 }
 
-/* ── CONTENEDOR DE ANCHO MÁXIMO
-   Centra el contenido en pantallas anchas sin media queries.
-── */
+/* ── CONTENEDOR DE ANCHO MÁXIMO ── */
 .home-header,
 .progress-wrap,
 .grid,
-.detail-inner {
+.detail-body {
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
@@ -84,11 +84,7 @@ body {
   margin-bottom: 8px;
 }
 
-.progress-label {
-  font-size: 0.75rem;
-  color: #8A8A98;
-  font-weight: 700;
-}
+.progress-label { font-size: 0.75rem; color: #8A8A98; font-weight: 700; }
 
 .progress-count {
   font-family: 'Baloo 2', sans-serif;
@@ -113,29 +109,26 @@ body {
   animation: shimmer 4s linear infinite;
 }
 
-/* 0 sin unidad: corrige warning "Unit of measure '%' is redundant" */
 @keyframes shimmer {
   0%   { background-position: 0 50%; }
   100% { background-position: 400% 50%; }
 }
 
 /* ── GRID / CARDS
-   auto-fill + minmax genera columnas automáticamente:
-   móvil ~320px → 2 col · tablet → 3-4 col · desktop → 5-6 col
+   minmax(160px): en iPhone SE (375px) → 2 col cómodas
+   tablet → 3-4 col · desktop → 5-6 col
 ── */
-
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 12px;
-  padding: 0 clamp(10px, 2vw, 24px);
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  padding: 0 clamp(12px, 3vw, 24px);
 }
 
-/* --c: fallback declarado aquí; JS lo sobreescribe por tarjeta con setProperty */
 .card {
   --c: #F59E0B;
   border-radius: 18px;
-  padding: 16px 14px 14px;
+  padding: 18px 16px 16px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -180,24 +173,24 @@ body {
 }
 
 .card-emoji {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
   display: block;
-  margin: 8px 0 9px;
+  margin: 8px 0 10px;
   line-height: 1;
 }
 
 .card-title {
   font-family: 'Baloo 2', sans-serif;
-  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
   font-weight: 800;
   color: #1A1A2E;
   display: block;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
   letter-spacing: -0.01em;
 }
 
 .card-tagline {
-  font-size: clamp(0.65rem, 1vw, 0.75rem);
+  font-size: clamp(0.68rem, 1vw, 0.78rem);
   font-weight: 600;
   line-height: 1.35;
   color: var(--c);
@@ -205,7 +198,6 @@ body {
 
 /* ── DETAIL ── */
 
-/* --c: fallback para la vista de detalle */
 .detail {
   --c: #F59E0B;
   min-height: 100vh;
@@ -215,16 +207,42 @@ body {
 
 .detail.active { display: block; }
 
+/* Barra de navegación sticky — siempre visible al hacer scroll */
+.detail-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 1px solid #EEEDF0;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #F7F6F2;
+  border: 2px solid #E5E4E0;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #8A8A98;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.13s;
+}
+
+.back-btn:active { transform: scale(0.95); }
+
 .detail-hero {
   background: white;
   position: relative;
   overflow: hidden;
   padding-bottom: 20px;
-}
-
-.detail-inner {
-  position: relative;
-  z-index: 2;
 }
 
 .detail-stripe {
@@ -244,31 +262,11 @@ body {
   pointer-events: none;
 }
 
-.back-btn {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin: 16px 16px 0;
-  padding: 8px 14px;
-  background: #F7F6F2;
-  border: 2px solid #E5E4E0;
-  border-radius: 12px;
-  font-family: 'Nunito', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #8A8A98;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 0.13s;
-}
-
-.back-btn:active { transform: scale(0.95); }
-
 .detail-emoji-wrap {
   text-align: center;
   padding: 18px 0 6px;
+  position: relative;
+  z-index: 2;
 }
 
 .detail-emoji {
@@ -290,6 +288,8 @@ body {
   color: #1A1A2E;
   padding: 0 20px;
   letter-spacing: -0.02em;
+  position: relative;
+  z-index: 2;
 }
 
 .detail-tagline {
@@ -298,13 +298,12 @@ body {
   font-weight: 600;
   color: #9C9CAA;
   padding: 4px 20px 0;
+  position: relative;
+  z-index: 2;
 }
 
-/* Secciones siempre en columna única, centradas con max-width legible */
 .detail-body {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 14px clamp(10px, 2vw, 24px) 48px;
+  padding: 14px clamp(12px, 3vw, 24px) 48px;
 }
 
 /* ── ACCORDION ── */
@@ -352,7 +351,7 @@ body {
   color: #C8C8D4;
   flex-shrink: 0;
   transition: transform 0.25s ease;
-  transform: scaleX(1.4);
+  transform: scaleX(1.8);
 }
 
 .section-arrow.open { transform: scaleX(1.8) rotate(180deg); }
@@ -369,7 +368,6 @@ body {
   max-height: 800px;
   opacity: 1;
   padding: 0 16px 14px;
-  /* 1px evita el warning "Float px values may render differently" */
   border-top: 1px solid #F2F1EE;
 }
 
@@ -415,7 +413,6 @@ body {
 
 .step-item:last-child { border-bottom: none; }
 
-/* --c: fallback también en step-num */
 .step-num {
   --c: #F59E0B;
   display: flex;
@@ -440,33 +437,89 @@ body {
   padding-top: 3px;
 }
 
-/* ── CTA ── */
+/* ── EVALUACIÓN ── */
 
-.cta-btn {
-  width: 100%;
-  padding: 16px;
-  border: none;
-  border-radius: 16px;
-  font-family: 'Baloo 2', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 800;
-  cursor: pointer;
-  margin-top: 12px;
-  color: white;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 0.13s, opacity 0.13s;
-  letter-spacing: 0.01em;
+.eval-wrap {
+  margin-top: 14px;
+  background: white;
+  border-radius: 18px;
+  padding: 20px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   animation: slideUp 0.28s ease 0.22s both;
 }
 
-.cta-btn:hover  { opacity: 0.9; }
-.cta-btn:active { transform: scale(0.97); opacity: 0.88; }
+.eval-question {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1A1A2E;
+  margin-bottom: 16px;
+  text-align: center;
+  line-height: 1.3;
+}
 
-.cta-btn.done {
-  background: #EEEDF0;
-  color: #B0B0BC;
-  box-shadow: none;
-  cursor: default;
+.eval-question strong {
+  color: var(--c);
+}
+
+.eval-options {
+  display: flex;
+  gap: 10px;
+}
+
+.eval-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  background: #F7F6F2;
+  border: 2px solid #EEEDF0;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #8A8A98;
+  line-height: 1.3;
+  text-align: center;
+  transition: transform 0.13s, border-color 0.13s, background 0.13s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.eval-btn .eval-emoji { font-size: 1.8rem; line-height: 1; }
+
+.eval-btn:active { transform: scale(0.95); }
+
+.eval-btn.selected {
+  border-color: var(--c);
+  background: white;
+  color: #1A1A2E;
+}
+
+/* resultado tras evaluar */
+.eval-result {
+  text-align: center;
+  padding: 20px 0 6px;
+  animation: slideUp 0.3s ease both;
+}
+
+.eval-result-emoji { font-size: 2.8rem; display: block; margin-bottom: 10px; }
+
+.eval-result-text {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1A1A2E;
+  line-height: 1.35;
+}
+
+.eval-result-sub {
+  font-size: 0.82rem;
+  color: #8A8A98;
+  font-weight: 600;
+  margin-top: 4px;
 }
 
 /* ── TOAST ── */

@@ -1,6 +1,18 @@
 const explored = new Set();
 let toastTimer;
 
+const EVAL_OPTIONS = [
+  { emoji: '😅', label: 'Fue difícil,\npero lo intenté', score: 1 },
+  { emoji: '🙂', label: 'Más o menos,\nvoy mejorando',   score: 2 },
+  { emoji: '🌟', label: '¡Me salió\nbien!',              score: 3 },
+];
+
+const EVAL_RESULTS = {
+  1: { emoji: '💪', text: '¡Lo intentaste y eso es lo que más importa!', sub: 'Sigue practicando, cada vez te saldrá mejor.' },
+  2: { emoji: '🚀', text: '¡Vas por buen camino!',                        sub: 'Con un poco más de práctica lo dominarás.' },
+  3: { emoji: '🏆', text: '¡Increíble, lo forjaste!',                     sub: 'Sigue así, esta habilidad ya es tuya.' },
+};
+
 function el(tag, cls, html) {
   const e = document.createElement(tag);
   if (cls) e.className = cls;
@@ -17,10 +29,10 @@ function showToast(msg) {
 }
 
 function makeSection(icon, title, innerHtml) {
-  const sec  = el('div', 'section');
-  const body = el('div', 'section-body');
+  const sec   = el('div', 'section');
+  const body  = el('div', 'section-body');
   const arrow = el('span', 'section-arrow', '▼');
-  const hdr  = el('div', 'section-header');
+  const hdr   = el('div', 'section-header');
 
   body.innerHTML = innerHtml;
   hdr.innerHTML  = `<span class="section-icon">${icon}</span><span class="section-title">${title}</span>`;
@@ -34,6 +46,47 @@ function makeSection(icon, title, innerHtml) {
   sec.appendChild(hdr);
   sec.appendChild(body);
   return sec;
+}
+
+function makeEval(concept) {
+  const isDone = explored.has(concept.id);
+  const wrap   = el('div', 'eval-wrap');
+
+  if (isDone) {
+    wrap.innerHTML = `
+      <div class="eval-result">
+        <span class="eval-result-emoji">✅</span>
+        <p class="eval-result-text">Ya practicaste ${concept.title}</p>
+        <p class="eval-result-sub">¡Sigue así!</p>
+      </div>`;
+    return wrap;
+  }
+
+  wrap.innerHTML = `<p class="eval-question">¿Cómo te fue practicando <strong>${concept.title}</strong>?</p>`;
+
+  const optionsEl = el('div', 'eval-options');
+
+  EVAL_OPTIONS.forEach(opt => {
+    const btn = el('button', 'eval-btn');
+    btn.innerHTML = `<span class="eval-emoji">${opt.emoji}</span>${opt.label.replace('\n', '<br>')}`;
+
+    btn.addEventListener('click', () => {
+      explored.add(concept.id);
+      const result = EVAL_RESULTS[opt.score];
+      wrap.innerHTML = `
+        <div class="eval-result">
+          <span class="eval-result-emoji">${result.emoji}</span>
+          <p class="eval-result-text">${result.text}</p>
+          <p class="eval-result-sub">${result.sub}</p>
+        </div>`;
+      showToast(`🔥 ¡${concept.title} forjada!`);
+    });
+
+    optionsEl.appendChild(btn);
+  });
+
+  wrap.appendChild(optionsEl);
+  return wrap;
 }
 
 function renderHome() {
@@ -103,10 +156,12 @@ function renderDetail(id) {
   ).join('');
 
   view.innerHTML = `
+    <nav class="detail-nav">
+      <button class="back-btn" id="back-btn">← Volver</button>
+    </nav>
     <div class="detail-hero">
       <span class="detail-stripe"></span>
       <div class="detail-glow"></div>
-      <button class="back-btn" id="back-btn">← Volver</button>
       <div class="detail-emoji-wrap"><span class="detail-emoji">${c.emoji}</span></div>
       <h1 class="detail-title">${c.title}</h1>
       <p class="detail-tagline">${c.tagline}</p>
@@ -119,22 +174,7 @@ function renderDetail(id) {
   body.appendChild(makeSection('💡', '¿Por qué importa?',        `<p class="why-text">${c.why}</p>`));
   body.appendChild(makeSection('📍', 'Dónde la usas en tu vida', exHtml));
   body.appendChild(makeSection('🎯', `Ejercicio: ${c.exercise.title}`, `<ol class="steps-list">${stepsHtml}</ol>`));
-
-  const isDone = explored.has(id);
-  const btn = el('button', `cta-btn${isDone ? ' done' : ''}`, isDone ? 'Ya lo practicaste' : '¡Lo voy a practicar!');
-
-  if (!isDone) {
-    btn.style.cssText = `background:${c.color};box-shadow:0 4px 18px ${c.color}55`;
-    btn.addEventListener('click', () => {
-      explored.add(id);
-      btn.className   = 'cta-btn done';
-      btn.textContent = 'Ya lo practicaste';
-      btn.style.cssText = '';
-      showToast(`🔥 ¡${c.title} forjada! 🔥`);
-    });
-  }
-
-  body.appendChild(btn);
+  body.appendChild(makeEval(c));
 }
 
 function goDetail(id) {
