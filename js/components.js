@@ -26,7 +26,10 @@ function makeSection(icon, title, content, openByDefault) {
   if (typeof content === 'string') body.innerHTML = content;
   else body.appendChild(content);
 
-  hdr.innerHTML = `<span class="section-icon">${icon}</span><span class="section-title">${title}</span>`;
+  const iconHtml = (icon !== null && icon !== undefined)
+    ? `<span class="section-icon">${icon}</span>`
+    : '';
+  hdr.innerHTML = iconHtml + `<span class="section-title">${title}</span>`;
   hdr.appendChild(arrow);
   hdr.addEventListener('click', () => {
     const open = body.classList.toggle('open');
@@ -141,7 +144,8 @@ function makeExercise(concept) {
 function makeHistoryInline(conceptId, color) {
   const history = Storage.getHistory()[conceptId] || [];
   const wrap    = el('div', 'history-inline');
-  wrap.innerHTML = `<p class="history-title"><span class="history-icon">${getThemedHistoryIcon()}</span> Tus prácticas de este concepto</p>`;
+  const histIcon = getThemedHistoryIcon();
+  wrap.innerHTML = `<p class="history-title">${histIcon ? `<span class="history-icon">${histIcon}</span> ` : ''}Tus prácticas de este concepto</p>`;
 
   if (!history.length) {
     wrap.innerHTML += `<p class="history-empty">Aún no hay prácticas registradas.</p>`;
