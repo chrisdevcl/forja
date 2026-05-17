@@ -17,9 +17,9 @@ const CONCEPTS = [
       { icon: '🎮', text: 'Esperar tu turno cuando juegas con amigos y amigas.' },
     ],
     exercise: { title: 'La Respiración Tortuga', steps: [
-      { text: 'Cuando quieras algo INMEDIATAMENTE y te frustres, DETENTE.' },
+      { text: 'Cuando quieras algo YA y te frustres, para completamente.' },
       { text: 'Respira despacio 4 veces, como una tortuga que va sin apuro.' },
-      { text: 'Cuenta hasta 10 en tu cabeza y recién entonces actúa.' },
+      { text: 'Cuenta hasta 10 en tu cabeza y solo entonces responde o haz lo que necesitas.' },
       { text: 'Después de esperar: ¿cómo te sentiste al actuar con calma?', input: { placeholder: 'Me sentí...' } },
     ]},
   },
@@ -67,7 +67,7 @@ const CONCEPTS = [
     exercise: { title: 'El Espejo Valiente', steps: [
       { text: 'Párate frente a un espejo.' },
       { text: 'Escribe UNA cosa que hiciste bien ayer, aunque sea pequeña.', input: { placeholder: 'Ayer hice bien...' } },
-      { text: 'Dítela en voz alta mirándote al espejo.' },
+      { text: 'Di en voz alta lo que escribiste, mientras te miras al espejo.' },
       { text: '¿Cómo te sentiste al decirlo?', input: { placeholder: 'Me sentí...' } },
     ]},
   },
@@ -133,7 +133,7 @@ const CONCEPTS = [
     exercise: { title: 'Habla con Yo', steps: [
       { text: 'Piensa en algo difícil que necesitas decirle a alguien.', input: { placeholder: '¿A quién y sobre qué?' } },
       { text: "Escribe lo que quieres decir empezando con 'Yo siento...' o 'Yo necesito...'", input: { placeholder: 'Yo siento / necesito...' } },
-      { text: 'Léelo en voz alta. ¿Suena como tú?' },
+      { text: 'Léelo en voz alta. ¿Usarías estas palabras cuando hablas normalmente?' },
       { text: 'Díselo a esa persona esta semana.' },
     ]},
   },
@@ -150,7 +150,7 @@ const CONCEPTS = [
       { text: 'Elige un grupo del que formas parte.', input: { placeholder: '¿Cuál grupo? (familia, curso, equipo...)' } },
       { text: 'Escribe en qué es buena cada persona de ese grupo.', input: { placeholder: 'Nombre: aporta...\nNombre: aporta...\nNombre: aporta...' } },
       { text: 'Piensa en algo donde podrían ayudarse entre todos esta semana.', input: { placeholder: 'Podríamos...' } },
-      { text: 'Propónselo al grupo hoy.' },
+      { text: 'Hoy cuéntale tu idea al grupo y pregúntales si quieren hacerlo juntos.' },
     ]},
   },
   {
@@ -182,7 +182,7 @@ const CONCEPTS = [
       { text: 'Piensa en algo que no has dicho con total honestidad recientemente.', input: { placeholder: '¿Qué fue?' } },
       { text: 'Escribe cómo sería decirlo honestamente.', input: { placeholder: 'La verdad es...' } },
       { text: 'Hazte tres preguntas: ¿Es verdad? ¿Es necesario? ¿Ayuda a alguien?', input: { placeholder: 'Las tres respuestas son sí / La que no cumple es...' } },
-      { text: 'Si las tres respuestas son sí, dilo esta semana.' },
+      { text: 'Si las tres respuestas son sí, esta semana dile la verdad a esa persona.' },
     ]},
   },
 
@@ -262,7 +262,7 @@ const CONCEPTS = [
     ],
     exercise: { title: 'Mis 3 Cosas Buenas', steps: [
       { text: 'Escribe 3 cosas buenas que pasaron hoy, aunque sean pequeñas.', input: { placeholder: '1. ...\n2. ...\n3. ...' } },
-      { text: 'Elige una y piensa: ¿a quién podrías agradecérsela?' },
+      { text: 'Elige una y escribe: ¿a quién podrías agradecérsela?', input: { placeholder: 'Se la agradezco a...' } },
       { text: 'Dísela o escríbesela hoy.', input: { placeholder: '¿A quién y qué le dijiste o escribiste?' } },
       { text: '¿Cómo reaccionó esa persona?', input: { placeholder: 'Reaccionó...' } },
     ]},
