@@ -114,7 +114,71 @@ const POKEMON_MAP = {
   gratitud:            39,   // Jigglypuff
 };
 
-// ── URL builders ──────────────────────────────────────────
+// ── Pixar — Wikipedia REST API ────────────────────────────
+// https://en.wikipedia.org/api/rest_v1/page/summary/{title}
+// Devuelve thumbnail.source que para personajes animados es arte oficial.
+// - API oficial (Wikimedia Foundation), CORS abierto, sin API key.
+// - Las páginas de personajes Pixar tienen arte de promotional artwork.
+// - Fallback a emoji si la página no existe o no tiene thumbnail.
+const PIXAR_WIKI_MAP = {
+  paciencia:           'Dory_(Finding_Nemo)',
+  autocontrol:         'Mike_Wazowski',
+  resiliencia:         'WALL-E',
+  confianza:           'Buzz_Lightyear',
+  curiosidad:          'Remy_(Ratatouille)',
+  creatividad:         'Woody_(Toy_Story)',
+  empatia:             'Joy_(Inside_Out)',
+  comunicacion:        'Miguel_(Coco)',
+  'trabajo-en-equipo': 'Mr._Incredible',
+  generosidad:         'Sulley',
+  honestidad:          'Nemo_(Finding_Nemo)',
+  independencia:       'Merida_(Disney_character)',
+  responsabilidad:     'Carl_Fredricksen',
+  perseverancia:       'Lightning_McQueen',
+  valentia:            'Violet_Parr',
+  gratitud:            'Forky',
+};
+
+// ── Pokemon type badge SVG ────────────────────────────────
+// Pill-shaped type badge, igual al estilo del juego.
+function typeBadge(label, color, textColor = 'white', size = 20) {
+  const w = label.length * 6.5 + 14;
+  return `<svg width="${w}" height="${size}" viewBox="0 0 ${w} ${size}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect width="${w}" height="${size}" rx="${size / 2}" fill="${color}"/>
+    <text x="${w / 2}" y="${size * 0.7}" text-anchor="middle"
+      font-family="'Baloo 2', sans-serif" font-size="9" font-weight="800"
+      fill="${textColor}" letter-spacing="0.5">${label}</text>
+  </svg>`;
+}
+
+// Tipos Pokémon para cada sección del detalle
+const POKE_SECTION_ICONS = {
+  why:      () => typeBadge('PSI',    '#F95587'),   // Psychic → reflexión mental
+  examples: () => typeBadge('NORMAL', '#9A9A78'),   // Normal  → vida cotidiana
+  exercise: () => typeBadge('LUCHA',  '#C03028'),   // Fighting → entrenamiento
+  history:  () => typeBadge('OBJETO', '#B8A038'),   // Item     → registro/diario
+};
+
+// Icono de sección según tema activo
+function getThemedSectionIcon(type, defaultEmoji) {
+  if (window._activeTheme === 'pokemon') {
+    return POKE_SECTION_ICONS[type]?.() ?? defaultEmoji;
+  }
+  return defaultEmoji;
+}
+
+function getThemedHistoryIcon() {
+  return window._activeTheme === 'pokemon'
+    ? POKE_SECTION_ICONS.history()
+    : '📋';
+}
+
+function getThemedToastSuccess(conceptTitle) {
+  if (window._activeTheme === 'pokemon') {
+    return `${typeBadge('EXP+', '#4CAF50')} ¡Práctica de ${conceptTitle} registrada!`;
+  }
+  return `🔥 ¡Práctica de ${conceptTitle} registrada!`;
+}
 function getPokemonUrl(conceptId) {
   const id = POKEMON_MAP[conceptId];
   return id

@@ -10,8 +10,9 @@ function renderHome() {
   const history     = Storage.getHistory();
   const done        = Object.keys(history).filter(id => history[id].length > 0).length;
   const pct         = Math.round((done / CONCEPTS.length) * 100);
-  const home        = document.getElementById('view-home');
-  home.innerHTML    = '';
+  const home = document.getElementById('view-home');
+  home.innerHTML = '';
+  document.getElementById('app').dataset.theme = window._activeTheme;
 
   // Header
   const header = el('div', 'home-header');
@@ -92,6 +93,8 @@ function renderDetail(id) {
   const view = document.getElementById('view-detail');
   view.style.setProperty('--c', c.color);
 
+  document.getElementById('app').dataset.theme = window._activeTheme;
+
   const display = getConceptDisplay(c, 'detail');
   const exHtml  = c.examples.map(ex =>
     `<div class="example-item">` +
@@ -116,9 +119,9 @@ function renderDetail(id) {
   document.getElementById('back-btn').addEventListener('click', goHome);
 
   const body = document.getElementById('detail-body');
-  body.appendChild(makeSection('💡', '¿Por qué importa?',        `<p class="why-text">${c.why}</p>`, true));
-  body.appendChild(makeSection('📍', 'Dónde la usas en tu vida', exHtml, false));
-  body.appendChild(makeSection('🎯', `Ejercicio: ${c.exercise.title}`, makeExercise(c), false));
+  body.appendChild(makeSection(getThemedSectionIcon('why',      '💡'), '¿Por qué importa?',        `<p class="why-text">${c.why}</p>`, true));
+  body.appendChild(makeSection(getThemedSectionIcon('examples', '📍'), 'Dónde la usas en tu vida', exHtml, false));
+  body.appendChild(makeSection(getThemedSectionIcon('exercise', '🎯'), `Ejercicio: ${c.exercise.title}`, makeExercise(c), false));
 
   // Contenedor único de historial — makeExercise lo actualiza por ID al completar
   const historyContainer = document.createElement('div');

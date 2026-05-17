@@ -254,7 +254,6 @@ body {
 .section:nth-child(3) { animation: slideUp 0.28s ease 0.16s both; }
 @keyframes slideUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
 .section-header { display:flex; align-items:center; gap:10px; padding:14px 16px; cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
-.section-icon  { font-size:1.2rem; flex-shrink:0; }
 .section-title { font-family:'Baloo 2',sans-serif; font-size:0.95rem; font-weight:800; flex:1; color:#1A1A2E; letter-spacing:-0.01em; }
 .section-arrow { font-size:0.75rem; color:#C8C8D4; flex-shrink:0; transform:scaleX(1.6); transition:transform 0.25s ease; }
 .section-arrow.open { transform:scaleX(1.6) rotate(180deg); }
@@ -267,6 +266,13 @@ body {
 .example-item:last-child  { border-bottom:none; }
 .example-icon { font-size:1.3rem; flex-shrink:0; margin-top:1px; }
 .example-text { font-size:0.86rem; line-height:1.55; color:#4A4A5A; font-weight:500; }
+
+/* En tema Pokémon, los iconos de ejemplo no tienen equivalente → se ocultan */
+#app[data-theme="pokemon"] .example-icon { display: none; }
+
+/* SVG type badges en section-icon: alinear verticalmente */
+.section-icon { font-size:1.2rem; flex-shrink:0; display:flex; align-items:center; }
+.history-icon { display:inline-flex; align-items:center; vertical-align:middle; margin-right:4px; }
 
 /* ── EXERCISE ── */
 .exercise-steps { padding-top:8px; }
