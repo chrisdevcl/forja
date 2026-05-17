@@ -17,7 +17,7 @@ const CONCEPTS = [
       { icon: '🎮', text: 'Esperar tu turno cuando juegas con amigos y amigas.' },
     ],
     exercise: { title: 'La Respiración Tortuga', steps: [
-      { text: 'Cuando quieras algo YA y te frustres, para completamente.' },
+      { text: 'Cuando quieras algo INMEDIATAMENTE y te frustres, DETENTE.' },
       { text: 'Respira despacio 4 veces, como una tortuga que va sin apuro.' },
       { text: 'Cuenta hasta 10 en tu cabeza y recién entonces actúa.' },
       { text: 'Después de esperar: ¿cómo te sentiste al actuar con calma?', input: { placeholder: 'Me sentí...' } },
