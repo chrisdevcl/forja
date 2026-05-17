@@ -19,8 +19,8 @@ const CONCEPTS = [
     exercise: { title: 'La Respiración Tortuga', steps: [
       { text: 'Cuando quieras algo YA y te frustres, para completamente.' },
       { text: 'Respira despacio 4 veces, como una tortuga que va sin apuro.' },
-      { text: 'Cuenta hasta 10 en tu cabeza antes de reaccionar.' },
-      { text: 'Ahora actúa.', input: { placeholder: '¿Cómo te sentiste después de esperar?' } },
+      { text: 'Cuenta hasta 10 en tu cabeza y recién entonces actúa.' },
+      { text: 'Después de esperar: ¿cómo te sentiste al actuar con calma?', input: { placeholder: 'Me sentí...' } },
     ]},
   },
   {
