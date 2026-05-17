@@ -130,7 +130,6 @@ body {
   font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 700;
   color: #8A8A98; cursor: pointer; white-space: nowrap;
   transition: all 0.15s; -webkit-tap-highlight-color: transparent;
-  display: inline-flex; align-items: center; gap: 6px;
 }
 .cat-btn:active { transform: scale(0.95); }
 .cat-btn.active { background: #1A1A2E; border-color: #1A1A2E; color: white; }

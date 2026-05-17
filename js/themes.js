@@ -84,13 +84,13 @@ const THEMES = [
     id: 'default',
     label: 'Emojis',
     getTriggerIcon: () => iconEmoji('😊', 20),
-    getCategoryIcon: (id) => iconEmoji({ todos:'⚡', mente:'🧠', relaciones:'🤝', crecimiento:'🚀' }[id] || '⚡', 16),
+    getCategoryIcon: () => null,
   },
   {
     id: 'pokemon',
     label: 'Pokémon',
     getTriggerIcon: () => iconPokeball(22),
-    getCategoryIcon: (id) => iconPokeType(id, 18),
+    getCategoryIcon: () => null,
   },
 ];
 
@@ -159,25 +159,15 @@ const POKE_SECTION_ICONS = {
   history:  () => typeBadge('OBJETO', '#B8A038'),   // Item     → registro/diario
 };
 
-// Icono de sección según tema activo
-function getThemedSectionIcon(type, defaultEmoji) {
-  if (window._activeTheme === 'pokemon') {
-    return POKE_SECTION_ICONS[type]?.() ?? defaultEmoji;
-  }
-  return defaultEmoji;
-}
+// Icono de sección: ningún tema tiene iconos en los acordeones
+function getThemedSectionIcon() { return null; }
 
-function getThemedHistoryIcon() {
-  return window._activeTheme === 'pokemon'
-    ? POKE_SECTION_ICONS.history()
-    : '📋';
-}
+// Historial: solo texto, sin icono
+function getThemedHistoryIcon() { return null; }
 
+// Toast: solo texto, sin emoji
 function getThemedToastSuccess(conceptTitle) {
-  if (window._activeTheme === 'pokemon') {
-    return `${typeBadge('EXP+', '#4CAF50')} ¡Práctica de ${conceptTitle} registrada!`;
-  }
-  return `🔥 ¡Práctica de ${conceptTitle} registrada!`;
+  return `¡Práctica de ${conceptTitle} registrada!`;
 }
 function getPokemonUrl(conceptId) {
   const id = POKEMON_MAP[conceptId];

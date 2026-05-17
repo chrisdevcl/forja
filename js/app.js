@@ -49,8 +49,8 @@ function renderHome() {
   const catBar     = el('div', 'cat-bar');
   CATEGORIES.forEach(cat => {
     const btn = el('button',
-      `cat-btn${window._activeCategory === cat.id ? ' active' : ''}`);
-    btn.innerHTML = `${getCategoryIcon(cat.id)}<span>${cat.label}</span>`;
+      `cat-btn${window._activeCategory === cat.id ? ' active' : ''}`,
+      cat.label);
     btn.addEventListener('click', () => {
       window._activeCategory = cat.id;
       renderHome();
@@ -119,9 +119,9 @@ function renderDetail(id) {
   document.getElementById('back-btn').addEventListener('click', goHome);
 
   const body = document.getElementById('detail-body');
-  body.appendChild(makeSection(getThemedSectionIcon('why',      '💡'), '¿Por qué importa?',        `<p class="why-text">${c.why}</p>`, true));
-  body.appendChild(makeSection(getThemedSectionIcon('examples', '📍'), 'Dónde la usas en tu vida', exHtml, false));
-  body.appendChild(makeSection(getThemedSectionIcon('exercise', '🎯'), `Ejercicio: ${c.exercise.title}`, makeExercise(c), false));
+  body.appendChild(makeSection(null, '¿Por qué importa?',        `<p class="why-text">${c.why}</p>`, true));
+  body.appendChild(makeSection(null, 'Dónde la usas en tu vida', exHtml, false));
+  body.appendChild(makeSection(null, `Ejercicio: ${c.exercise.title}`, makeExercise(c), false));
 
   // Contenedor único de historial — makeExercise lo actualiza por ID al completar
   const historyContainer = document.createElement('div');
