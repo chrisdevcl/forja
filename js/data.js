@@ -10,7 +10,7 @@ const CONCEPTS = [
   {
     id: 'paciencia', emoji: '🐢', title: 'Paciencia', color: '#F59E0B', category: 'mente',
     tagline: 'Las cosas buenas toman tiempo',
-    why: 'Cuando aprendes a esperar sin enojarte, puedes lograr cosas más grandes y sentirte tranquilo/a por dentro. Las personas pacientes cometen menos errores porque piensan antes de actuar.',
+    why: 'Cuando aprendes a esperar aunque sientas impaciencia o frustración, puedes lograr cosas más grandes y sentirte tranquilo/a por dentro. Las personas pacientes no dejan de sentir, pero piensan antes de reaccionar.',
     examples: [
       { icon: '🚲', text: 'Aprender a andar en bicicleta. No sale a la primera, ¡y eso está bien!' },
       { icon: '🍰', text: 'Esperar que el pastel se hornee en lugar de abrirlo antes de tiempo.' },
@@ -34,9 +34,9 @@ const CONCEPTS = [
     ],
     exercise: { title: 'El Semáforo Interior', steps: [
       { text: 'Piensa en una situación reciente donde quisiste reaccionar mal.', input: { placeholder: '¿Qué pasó?' } },
-      { text: 'Rojo: describe qué sentiste en ese momento.', input: { placeholder: '¿Qué emoción tenías?' } },
-      { text: 'Amarillo: ¿qué podrías haber hecho para pausar y pensar antes de actuar?' },
-      { text: 'Verde: ¿cómo podrías reaccionar diferente la próxima vez?', input: { placeholder: 'Mi plan para la próxima vez...' } },
+      { text: 'Rojo: ¿cómo reaccionaste o quisiste reaccionar en ese momento?', input: { placeholder: '¿Qué hiciste o estuviste a punto de hacer?' } },
+      { text: 'Amarillo: ¿qué podrías haber hecho para pausar antes de reaccionar?', input: { placeholder: 'Podría haber...' } },
+      { text: 'Verde: ¿cómo vas a reaccionar diferente la próxima vez?', input: { placeholder: 'Mi plan es...' } },
     ]},
   },
   {
@@ -98,7 +98,7 @@ const CONCEPTS = [
     ],
     exercise: { title: 'El Juego de los ¿Y si...?', steps: [
       { text: 'Piensa en un problema o situación que tienes ahora.', input: { placeholder: 'El problema es...' } },
-      { text: 'Escribe 3 ideas para resolverlo de forma diferente, aunque parezcan locas.', input: { placeholder: 'Idea 1: ...' } },
+      { text: 'Escribe 3 ideas para resolverlo de forma diferente, aunque parezcan locas.', input: { placeholder: 'Idea 1: ...\nIdea 2: ...\nIdea 3: ...' } },
       { text: 'Elige la más interesante y escribe cómo la aplicarías.', input: { placeholder: 'La aplicaría así...' } },
       { text: 'Intenta aplicarla esta semana.' },
     ]},
@@ -148,7 +148,7 @@ const CONCEPTS = [
     ],
     exercise: { title: 'El Mapa de Mi Equipo', steps: [
       { text: 'Elige un grupo del que formas parte.', input: { placeholder: '¿Cuál grupo? (familia, curso, equipo...)' } },
-      { text: 'Escribe en qué es buena cada persona de ese grupo.', input: { placeholder: 'Cada persona aporta...' } },
+      { text: 'Escribe en qué es buena cada persona de ese grupo.', input: { placeholder: 'Nombre: aporta...\nNombre: aporta...\nNombre: aporta...' } },
       { text: 'Piensa en algo donde podrían ayudarse entre todos esta semana.', input: { placeholder: 'Podríamos...' } },
       { text: 'Propónselo al grupo hoy.' },
     ]},
@@ -181,7 +181,7 @@ const CONCEPTS = [
     exercise: { title: 'La Prueba del Espejo', steps: [
       { text: 'Piensa en algo que no has dicho con total honestidad recientemente.', input: { placeholder: '¿Qué fue?' } },
       { text: 'Escribe cómo sería decirlo honestamente.', input: { placeholder: 'La verdad es...' } },
-      { text: 'Hazte tres preguntas: ¿Es verdad? ¿Es necesario? ¿Ayuda a alguien?' },
+      { text: 'Hazte tres preguntas: ¿Es verdad? ¿Es necesario? ¿Ayuda a alguien?', input: { placeholder: 'Las tres respuestas son sí / La que no cumple es...' } },
       { text: 'Si las tres respuestas son sí, dilo esta semana.' },
     ]},
   },
@@ -197,7 +197,7 @@ const CONCEPTS = [
       { icon: '📚', text: 'Empezar tus tareas sin esperar que te lo digan.' },
     ],
     exercise: { title: 'Mis Superpoderes de Esta Semana', steps: [
-      { text: 'Piensa en 3 cosas que normalmente pides ayuda para hacer.' },
+      { text: 'Piensa en 3 cosas que normalmente pides ayuda para hacer.', input: { placeholder: '1. ...\n2. ...\n3. ...' } },
       { text: 'Elige UNA que harás por tu cuenta esta semana.', input: { placeholder: 'Esta semana haré solo/a...' } },
       { text: 'Hazla sin pedir ayuda.' },
       { text: '¿Cómo te sentiste al lograrlo?', input: { placeholder: 'Me sentí...' } },
@@ -216,7 +216,7 @@ const CONCEPTS = [
       { text: 'Elige UNA responsabilidad nueva que quieras asumir esta semana.', input: { placeholder: 'Mi responsabilidad será...' } },
       { text: 'Dísela a alguien de tu familia para que lo sepa.' },
       { text: 'Cúmplela cada día sin que te lo recuerden.' },
-      { text: '¿La cumpliste? ¿Cómo te sentiste?', input: { placeholder: 'Lo que aprendí fue...' } },
+      { text: '¿La cumpliste todos los días? Escribe cómo fue la experiencia.', input: { placeholder: 'La cumplí / No la cumplí porque... Lo que aprendí fue...' } },
     ]},
   },
   {
@@ -246,9 +246,9 @@ const CONCEPTS = [
     ],
     exercise: { title: 'Un Pequeño Acto Valiente', steps: [
       { text: 'Piensa en algo que quieres hacer pero que te da miedo o vergüenza.', input: { placeholder: 'Quiero... pero me da miedo...' } },
-      { text: 'Decide hacerlo esta semana, solo una vez.' },
-      { text: '¿Cómo te sentiste antes de hacerlo?', input: { placeholder: 'Antes me sentía...' } },
-      { text: '¿Cómo te sentiste después?', input: { placeholder: 'Después me sentí...' } },
+      { text: 'Decide cuándo exactamente lo harás esta semana.', input: { placeholder: 'Lo haré el día...' } },
+      { text: '¿Cómo te sientes ANTES de hacerlo? Rellena esto justo antes de actuar.', input: { placeholder: 'Ahora mismo siento...' } },
+      { text: '¿Qué pasó y cómo te sentiste DESPUÉS? Vuelve aquí una vez que lo hayas hecho.', input: { placeholder: 'Pasó... / Me sentí...' } },
     ]},
   },
   {

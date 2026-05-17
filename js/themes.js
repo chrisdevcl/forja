@@ -114,31 +114,6 @@ const POKEMON_MAP = {
   gratitud:            39,   // Jigglypuff
 };
 
-// ── Pixar — Wikipedia REST API ────────────────────────────
-// https://en.wikipedia.org/api/rest_v1/page/summary/{title}
-// Devuelve thumbnail.source que para personajes animados es arte oficial.
-// - API oficial (Wikimedia Foundation), CORS abierto, sin API key.
-// - Las páginas de personajes Pixar tienen arte de promotional artwork.
-// - Fallback a emoji si la página no existe o no tiene thumbnail.
-const PIXAR_WIKI_MAP = {
-  paciencia:           'Dory_(Finding_Nemo)',
-  autocontrol:         'Mike_Wazowski',
-  resiliencia:         'WALL-E',
-  confianza:           'Buzz_Lightyear',
-  curiosidad:          'Remy_(Ratatouille)',
-  creatividad:         'Woody_(Toy_Story)',
-  empatia:             'Joy_(Inside_Out)',
-  comunicacion:        'Miguel_(Coco)',
-  'trabajo-en-equipo': 'Mr._Incredible',
-  generosidad:         'Sulley',
-  honestidad:          'Nemo_(Finding_Nemo)',
-  independencia:       'Merida_(Disney_character)',
-  responsabilidad:     'Carl_Fredricksen',
-  perseverancia:       'Lightning_McQueen',
-  valentia:            'Violet_Parr',
-  gratitud:            'Forky',
-};
-
 // ── URL builders ──────────────────────────────────────────
 function getPokemonUrl(conceptId) {
   const id = POKEMON_MAP[conceptId];

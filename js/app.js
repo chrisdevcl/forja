@@ -119,7 +119,12 @@ function renderDetail(id) {
   body.appendChild(makeSection('💡', '¿Por qué importa?',        `<p class="why-text">${c.why}</p>`, true));
   body.appendChild(makeSection('📍', 'Dónde la usas en tu vida', exHtml, false));
   body.appendChild(makeSection('🎯', `Ejercicio: ${c.exercise.title}`, makeExercise(c), false));
-  if (Storage.getCount(c.id) > 0) body.appendChild(makeHistoryInline(c.id, c.color));
+
+  // Contenedor único de historial — makeExercise lo actualiza por ID al completar
+  const historyContainer = document.createElement('div');
+  historyContainer.id = 'concept-history';
+  if (Storage.getCount(c.id) > 0) historyContainer.appendChild(makeHistoryInline(c.id, c.color));
+  body.appendChild(historyContainer);
 }
 
 // ── Theme change ───────────────────────────────────────────

@@ -66,11 +66,23 @@ function makeExercise(concept) {
 
     checkbox.addEventListener('click', () => {
       if (checked.has(i)) {
+        // Desmarcar: siempre permitido
         checked.delete(i);
         stepEl.classList.remove('done');
         checkbox.classList.remove('checked');
         checkbox.innerHTML = '';
       } else {
+        // Marcar: si el paso tiene input, debe tener contenido
+        if (step.input) {
+          const inputEl = content.querySelector('.ex-input');
+          if (!inputEl || !inputEl.value.trim()) {
+            // Sacudir visualmente el input para indicar que falta llenarlo
+            inputEl.classList.add('ex-input--error');
+            inputEl.focus();
+            setTimeout(() => inputEl.classList.remove('ex-input--error'), 600);
+            return;
+          }
+        }
         checked.add(i);
         stepEl.classList.add('done');
         checkbox.classList.add('checked');
@@ -101,11 +113,25 @@ function makeExercise(concept) {
 
   btn.addEventListener('click', () => {
     if (btn.disabled) return;
-    Storage.saveSession(concept.id, { ...inputs });
+
+    // Guardar como pares {q, a} para mostrar contexto en el historial
+    const fullInputs = {};
+    concept.exercise.steps.forEach((step, i) => {
+      if (step.input && inputs[i]?.trim()) {
+        fullInputs[i] = { q: step.text, a: inputs[i].trim() };
+      }
+    });
+
+    Storage.saveSession(concept.id, fullInputs);
     const count = Storage.getCount(concept.id);
     showToast(`🔥 ¡Práctica #${count} de ${concept.title} registrada!`);
     wrap.removeChild(btn);
-    wrap.appendChild(makeHistoryInline(concept.id, concept.color));
+
+    const existing = document.getElementById('concept-history');
+    if (existing) {
+      existing.innerHTML = '';
+      existing.appendChild(makeHistoryInline(concept.id, concept.color));
+    }
   });
 
   wrap.appendChild(btn);
@@ -124,15 +150,37 @@ function makeHistoryInline(conceptId, color) {
   }
 
   const list = el('div', 'history-list');
+
   history.slice().reverse().forEach((s, i) => {
-    const item   = el('div', 'history-item');
-    const inputs = Object.values(s.inputs || {}).filter(v => v?.trim());
-    item.innerHTML =
-      `<span class="history-num" style="background:${color}">#${history.length - i}</span>` +
-      `<div class="history-info">` +
-        `<span class="history-date">${s.date}</span>` +
-        (inputs.length ? `<span class="history-notes">${inputs[0]}</span>` : '') +
-      `</div>`;
+    const num  = history.length - i;
+    const item = el('div', 'history-item');
+
+    // Cabecera: número + fecha
+    const hdr = el('div', 'history-hdr');
+    hdr.innerHTML =
+      `<span class="history-num" style="background:${color}">#${num}</span>` +
+      `<span class="history-date">${s.date}</span>`;
+    item.appendChild(hdr);
+
+    // Entradas: soporte para formato nuevo {q,a} y legacy (string)
+    const entries = Object.values(s.inputs || {}).filter(e => e != null);
+    if (entries.length) {
+      const diary = el('div', 'history-diary');
+      entries.forEach(e => {
+        const entry = el('div', 'history-entry');
+        if (typeof e === 'object' && e.q && e.a) {
+          entry.innerHTML =
+            `<p class="history-q">${e.q}</p>` +
+            `<p class="history-a">${e.a}</p>`;
+        } else if (typeof e === 'string' && e.trim()) {
+          // Formato legacy: solo muestra la respuesta
+          entry.innerHTML = `<p class="history-a">${e}</p>`;
+        }
+        if (entry.innerHTML) diary.appendChild(entry);
+      });
+      item.appendChild(diary);
+    }
+
     list.appendChild(item);
   });
 
