@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Forja</title>
-  <meta name="description" content="16 habilidades esenciales para la vida, con ejemplos y ejercicios para niños y niñas." />
+  <meta name="description" content="Las habilidades que nadie enseña en el colegio." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,11 +13,22 @@
 </head>
 <body>
   <div id="app">
-    <div class="home" id="view-home"></div>
+    <div class="home"  id="view-home"></div>
     <div class="detail" id="view-detail"></div>
-    <div class="toast" id="toast"></div>
+    <div class="toast"  id="toast"></div>
   </div>
+
+  <!-- Orden de dependencias:
+       1. storage    → helpers de localStorage
+       2. data       → CONCEPTS, CATEGORIES
+       3. themes     → THEMES, mapas de imágenes, fetchPixarImages, getConceptDisplay
+       4. components → el(), makeSection(), makeExercise(), makeHistoryInline(), makeThemePicker()
+       5. app        → renderHome(), renderDetail(), navegación
+  -->
+  <script src="js/storage.js"></script>
   <script src="js/data.js"></script>
+  <script src="js/themes.js"></script>
+  <script src="js/components.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
