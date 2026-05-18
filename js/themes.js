@@ -79,11 +79,32 @@ function iconEmoji(emoji, size = 16) {
 }
 
 // ── Theme definitions ─────────────────────────────────────
+// ── Animal emoji map ──────────────────────────────────────
+// Cada animal refleja la habilidad que representa.
+const ANIMAL_MAP = {
+  paciencia:           '🐢',  // tortuga — lenta y constante
+  autocontrol:         '🦉',  // búho — observa antes de actuar
+  resiliencia:         '🦅',  // águila — se levanta y vuela alto
+  confianza:           '🦁',  // león — seguro de sí mismo
+  curiosidad:          '🐒',  // mono — explora y descubre todo
+  creatividad:         '🦜',  // loro — colorido e imaginativo
+  empatia:             '🐬',  // delfín — sensible y social
+  comunicacion:        '🐦',  // pájaro — canta y se comunica
+  'trabajo-en-equipo': '🐺',  // lobo — trabaja en manada
+  generosidad:         '🐘',  // elefante — nunca olvida a los suyos
+  honestidad:          '🦊',  // zorro — conocido por su astucia, aquí lo usamos como el que no engaña
+  independencia:       '🐈',  // gato — independiente por naturaleza
+  responsabilidad:     '🐝',  // abeja — laboriosa y cumplida
+  perseverancia:       '🐜',  // hormiga — pequeña pero imparable
+  valentia:            '🦁',  // jaguar — valiente y decidido
+  gratitud:            '🦋',  // mariposa — transforma y alegra
+};
+
 const THEMES = [
   {
-    id: 'default',
-    label: 'Emojis',
-    getTriggerIcon: () => iconEmoji('😊', 20),
+    id: 'animals',
+    label: 'Animales',
+    getTriggerIcon: () => iconEmoji('🐾', 20),
     getCategoryIcon: () => null,
   },
   {
@@ -211,5 +232,10 @@ function getConceptDisplay(concept, size) {
     );
   }
 
-  return `<span class="concept-emoji">${concept.emoji}</span>`;
+  // animals theme (and any future theme without images)
+  const emoji = window._activeTheme === 'animals'
+    ? (ANIMAL_MAP[concept.id] || concept.emoji)
+    : concept.emoji;
+
+  return `<span class="concept-emoji">${emoji}</span>`;
 }

@@ -49,7 +49,7 @@ const Storage = (() => {
   }
 
   function loadTheme() {
-    return localStorage.getItem(THEME_KEY) || 'default';
+    return localStorage.getItem(THEME_KEY) || 'animals';
   }
 
   return {
