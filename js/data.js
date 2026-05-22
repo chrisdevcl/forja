@@ -267,4 +267,148 @@ const CONCEPTS = [
       { text: '¿Cómo reaccionó esa persona?', input: { placeholder: 'Reaccionó...' } },
     ]},
   },
+    {
+        id: 'compartir', emoji: '🤲', title: 'Compartir', color: '#EC4899', category: 'relaciones',
+        tagline: 'Lo que das vuelve multiplicado',
+        why: 'Compartir no significa quedarte sin nada. Significa que valoras la relación más que el objeto. Las personas que comparten construyen amistades más fuertes y se sienten más felices porque hacen sentir bien a otros.',
+        examples: [
+            { icon: '🍕', text: 'Ofrecer parte de tu merienda a alguien sin que te lo pida.' },
+            { icon: '🎮', text: 'Ceder el control o el turno aunque estés ganando.' },
+            { icon: '📚', text: 'Prestar algo tuyo que sabes que le va a gustar a alguien.' },
+        ],
+        exercise: { title: 'El Regalo Sin Envoltura', steps: [
+                { text: 'Piensa en algo tuyo que podrías compartir hoy con alguien.', input: { placeholder: '¿Qué puedes compartir y con quién?' } },
+                { text: 'Compártelo sin esperar que te lo devuelvan ni que te agradezcan.' },
+                { text: '¿Cómo reaccionó la otra persona?', input: { placeholder: 'Reaccionó...' } },
+                { text: '¿Cómo te sentiste tú al hacerlo?', input: { placeholder: 'Me sentí...' } },
+            ]},
+    },
+    {
+        id: 'respeto', emoji: '🤍', title: 'Respeto', color: '#6366F1', category: 'relaciones',
+        tagline: 'Tratar a todos como merecen',
+        why: 'El respeto no es obedecer o estar de acuerdo con todo. Es reconocer que cada persona tiene valor, aunque sea diferente a ti. Cuando respetas, las personas confían en ti y se sienten seguras a tu lado.',
+        examples: [
+            { icon: '🙋', text: 'Escuchar sin interrumpir cuando alguien habla, aunque no estés de acuerdo.' },
+            { icon: '🎭', text: 'No burlarte de los gustos, forma de ser o errores de alguien.' },
+            { icon: '🏠', text: 'Cuidar las cosas de los demás como si fueran tuyas.' },
+        ],
+        exercise: { title: 'Los Zapatos del Respeto', steps: [
+                { text: 'Piensa en alguien que es muy diferente a ti en gustos o forma de ser.', input: { placeholder: '¿Quién es y en qué es diferente?' } },
+                { text: '¿Hubo alguna vez que no lo trataste con respeto? Sé honesto/a.', input: { placeholder: 'Lo que pasó fue...' } },
+                { text: '¿Qué podrías hacer diferente si vuelve a pasar algo parecido?', input: { placeholder: 'La próxima vez podría...' } },
+                { text: 'Hoy haz algo concreto para mostrarle respeto a esa persona.' },
+            ]},
+    },
+    {
+        id: 'amabilidad', emoji: '🌸', title: 'Amabilidad', color: '#F472B6', category: 'relaciones',
+        tagline: 'Los gestos pequeños importan mucho',
+        why: 'Ser amable no cuesta nada y puede cambiar el día de alguien. Una palabra, una sonrisa o una pequeña ayuda pueden transformar completamente cómo se siente una persona. La amabilidad también te hace sentir bien a ti.',
+        examples: [
+            { icon: '😊', text: 'Saludar con una sonrisa aunque tengas un día difícil.' },
+            { icon: '🚪', text: 'Ceder el paso o ayudar a alguien sin esperar nada a cambio.' },
+            { icon: '✏️', text: 'Escribirle a alguien "espero que estés bien" cuando sabes que lo está pasando mal.' },
+        ],
+        exercise: { title: 'El Día Amable', steps: [
+                { text: 'Hoy proponte hacer 3 gestos amables con personas distintas.' },
+                { text: '¿Qué hiciste? Describe los tres gestos.', input: { placeholder: 'Gesto 1: ...\nGesto 2: ...\nGesto 3: ...' } },
+                { text: '¿Cuál fue el que más te costó hacer?', input: { placeholder: 'El más difícil fue...' } },
+                { text: '¿Cómo te sentiste al final del día?', input: { placeholder: 'Al terminar el día me sentí...' } },
+            ]},
+    },
+    {
+        id: 'perdon', emoji: '🕊️', title: 'Perdón', color: '#A78BFA', category: 'relaciones',
+        tagline: 'Soltar lo que duele te libera',
+        why: 'Perdonar no es decir que lo que pasó estuvo bien. Es decidir no cargar con ese peso. Guardar rencor cansa y ocupa espacio. El perdón, tanto pedirlo como darlo, es un acto de fuerza, no de debilidad.',
+        examples: [
+            { icon: '😔', text: 'Decir "lo siento" de verdad cuando hiciste algo que lastimó a alguien.' },
+            { icon: '🤝', text: 'Hacer las paces con un amigo/a después de una pelea, aunque haya costado.' },
+            { icon: '💭', text: 'Decidir no seguir enojado/a con alguien aunque no te hayan pedido perdón.' },
+        ],
+        exercise: { title: 'La Carta que Libera', steps: [
+                { text: 'Piensa en alguien con quien quedó algo pendiente: una disculpa que no diste o un enojo que sigues cargando.', input: { placeholder: '¿Qué pasó y con quién?' } },
+                { text: 'Escribe lo que sientes sin filtros (esta parte es solo para ti).', input: { placeholder: 'Lo que siento es...' } },
+                { text: '¿Qué necesitarías para poder soltar ese peso?', input: { placeholder: 'Para perdonar o pedir perdón necesitaría...' } },
+                { text: 'Da un pequeño paso esta semana: un mensaje, una conversación o simplemente decidir soltarlo internamente.' },
+            ]},
+    },
+    {
+        id: 'autocuidado', emoji: '🌿', title: 'Autocuidado', color: '#34D399', category: 'mente',
+        tagline: 'Para cuidar a otros, primero cuídate',
+        why: 'Cuidarte no es egoísta, es necesario. Dormir bien, comer, descansar y hacer cosas que te gustan recarga tu energía. Una persona que se cuida tiene más para dar a los demás.',
+        examples: [
+            { icon: '😴', text: 'Dormir las horas que necesitas aunque quieras seguir viendo algo.' },
+            { icon: '🏃', text: 'Moverse y hacer algo físico cada día, aunque sea caminar un rato.' },
+            { icon: '📴', text: 'Darte un tiempo sin pantallas para hacer algo que genuinamente disfrutes.' },
+        ],
+        exercise: { title: 'Mi Carga y Mi Recarga', steps: [
+                { text: '¿Qué cosas te agotan durante la semana?', input: { placeholder: 'Me agota...' } },
+                { text: '¿Qué cosas te recargan y te hacen sentir bien?', input: { placeholder: 'Me recarga...' } },
+                { text: 'Elige UNA cosa que te recarga y comprométete a hacerla esta semana.', input: { placeholder: 'Esta semana voy a...' } },
+                { text: '¿La hiciste? ¿Cómo te sentiste después?', input: { placeholder: 'La hice / No la hice porque... Me sentí...' } },
+            ]},
+    },
+    {
+        id: 'concentracion', emoji: '🎯', title: 'Concentración', color: '#0891B2', category: 'mente',
+        tagline: 'Una cosa a la vez, bien hecha',
+        why: 'Vivimos rodeados de distracciones. Saber enfocarse en una sola cosa durante un rato es una habilidad cada vez más difícil y más valiosa. Cuando te concentras, haces mejor las cosas y terminas más rápido.',
+        examples: [
+            { icon: '📖', text: 'Leer o estudiar sin el celular cerca, aunque sea 20 minutos.' },
+            { icon: '🎨', text: 'Trabajar en algo creativo sin interrumpirte para ver notificaciones.' },
+            { icon: '🍽️', text: 'Comer sin pantalla, prestando atención a la comida y a quien está contigo.' },
+        ],
+        exercise: { title: 'El Bloque Sin Distracciones', steps: [
+                { text: '¿Cuál es tu distracción más difícil de ignorar?', input: { placeholder: 'Mi mayor distracción es...' } },
+                { text: 'Elige una tarea y pon un cronómetro en 15 minutos. Apaga o aleja todo lo que distrae.' },
+                { text: '¿Pudiste mantenerte enfocado/a los 15 minutos? ¿Qué pasó?', input: { placeholder: 'Lo que pasó fue...' } },
+                { text: 'Repítelo mañana sumando 5 minutos más. ¿Cuánto aguantaste?', input: { placeholder: 'Aguanté... minutos y...' } },
+            ]},
+    },
+    {
+        id: 'aceptacion', emoji: '☀️', title: 'Aceptación', color: '#D97706', category: 'mente',
+        tagline: 'No todo se puede cambiar, y está bien',
+        why: 'Hay cosas que podemos cambiar y cosas que no. Saber cuál es cuál ahorra mucha energía y frustración. Aceptar no es resignarse: es elegir dónde poner tu esfuerzo para que realmente sirva de algo.',
+        examples: [
+            { icon: '🌧️', text: 'Que llueva el día de tus planes: no puedes cambiarlo, pero sí qué haces con el tiempo libre.' },
+            { icon: '📏', text: 'Tener un cuerpo o características que no elegiste, pero que son tuyas.' },
+            { icon: '👥', text: 'Que alguien a tu alrededor sea diferente a como quisieras que fuera.' },
+        ],
+        exercise: { title: 'Lo que Puedo y Lo que No', steps: [
+                { text: 'Piensa en algo que te preocupa o frustra últimamente.', input: { placeholder: 'Me frustra o preocupa...' } },
+                { text: '¿Qué parte de eso SÍ puedes cambiar o hacer diferente?', input: { placeholder: 'Lo que sí puedo hacer es...' } },
+                { text: '¿Qué parte NO puedes cambiar?', input: { placeholder: 'Lo que no puedo cambiar es...' } },
+                { text: '¿En qué parte vas a enfocar tu energía esta semana?', input: { placeholder: 'Voy a enfocarme en...' } },
+            ]},
+    },
+    {
+        id: 'humildad', emoji: '🌾', title: 'Humildad', color: '#92400E', category: 'crecimiento',
+        tagline: 'Siempre hay algo nuevo por aprender',
+        why: 'Las personas humildes no se creen menos que los demás, sino que reconocen que siempre hay algo por aprender. La humildad te abre puertas que el orgullo cierra: te permite pedir ayuda, aceptar consejos y mejorar.',
+        examples: [
+            { icon: '🏆', text: 'Ganar un juego o prueba y no presumirlo delante de quien perdió.' },
+            { icon: '❓', text: 'Decir "no sé" cuando no sabes algo, en vez de inventar una respuesta.' },
+            { icon: '👂', text: 'Escuchar la opinión de alguien más joven porque igual puede tener razón.' },
+        ],
+        exercise: { title: 'El Mapa de Lo que No Sé', steps: [
+                { text: 'Piensa en algo que haces bien. ¿Hay alguien que lo hace mejor que tú?', input: { placeholder: 'Lo que hago bien es... / Lo hace mejor...' } },
+                { text: '¿Qué podrías aprender de esa persona si le preguntaras?', input: { placeholder: 'Podría aprender...' } },
+                { text: 'Esta semana pídele a alguien un consejo sobre algo en lo que quieres mejorar.', input: { placeholder: '¿A quién le pediste consejo y sobre qué?' } },
+                { text: '¿Qué aprendiste de esa conversación?', input: { placeholder: 'Aprendí que...' } },
+            ]},
+    },
+    {
+        id: 'organizacion', emoji: '🗂️', title: 'Organización', color: '#B45309', category: 'crecimiento',
+        tagline: 'Un lugar para cada cosa',
+        why: 'Cuando tienes tus cosas y tu tiempo organizados, gastas menos energía buscando y puedes concentrarte en lo que importa. La organización no es perfección: es tener un sistema que funcione para ti.',
+        examples: [
+            { icon: '🎒', text: 'Preparar la mochila la noche anterior para no salir apurado/a.' },
+            { icon: '📅', text: 'Saber cuándo tienes pruebas o actividades importantes con anticipación.' },
+            { icon: '🛏️', text: 'Tener tu espacio ordenado para encontrar las cosas cuando las necesitas.' },
+        ],
+        exercise: { title: 'El Sistema que Me Funciona', steps: [
+                { text: '¿Qué parte de tu vida está más desorganizada ahora?', input: { placeholder: 'Lo más desorganizado es...' } },
+                { text: 'Elige UNA cosa pequeña que puedas organizar hoy (una mochila, carpeta o cajón).', input: { placeholder: 'Voy a organizar...' } },
+                { text: 'Hazlo. ¿Cuánto tiempo te tomó?', input: { placeholder: 'Me tomó... / Lo que hice fue...' } },
+                { text: '¿Cómo te sentiste después de haberlo hecho?', input: { placeholder: 'Me sentí...' } },
+            ]},
+    },
 ];

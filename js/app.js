@@ -2,9 +2,6 @@
 window._activeTheme    = Storage.loadTheme();
 window._activeCategory = 'todos';
 
-// ── Init ───────────────────────────────────────────────────
-renderHome();
-
 // ── Home ───────────────────────────────────────────────────
 function renderHome() {
   const history     = Storage.getHistory();
@@ -12,7 +9,6 @@ function renderHome() {
   const pct         = Math.round((done / CONCEPTS.length) * 100);
   const home = document.getElementById('view-home');
   home.innerHTML = '';
-  document.getElementById('app').dataset.theme = window._activeTheme;
 
   // Header
   const header = el('div', 'home-header');
@@ -92,8 +88,6 @@ function renderDetail(id) {
   const c    = CONCEPTS.find(x => x.id === id);
   const view = document.getElementById('view-detail');
   view.style.setProperty('--c', c.color);
-
-  document.getElementById('app').dataset.theme = window._activeTheme;
 
   const display = getConceptDisplay(c, 'detail');
   const exHtml  = c.examples.map(ex =>

@@ -1,4 +1,5 @@
 // ── SVG Icons ─────────────────────────────────────────────
+// Solo los que se usan: trigger del selector de tema.
 
 function iconPokeball(size = 22) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -10,112 +11,55 @@ function iconPokeball(size = 22) {
   </svg>`;
 }
 
-function iconLamp(size = 22) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="5" y="21" width="14" height="2.5" rx="1.2" fill="#1a1a2e"/>
-    <line x1="12" y1="22" x2="8"  y2="16" stroke="#1a1a2e" stroke-width="2.2" stroke-linecap="round"/>
-    <line x1="8"  y1="16" x2="13" y2="10" stroke="#1a1a2e" stroke-width="2.2" stroke-linecap="round"/>
-    <path d="M10 10 L16 10 L17 6 L9 6 Z" fill="#F59E0B" stroke="#1a1a2e" stroke-width="1" stroke-linejoin="round"/>
-    <ellipse cx="13" cy="5.5" rx="3.5" ry="1.8" fill="#FDE68A"/>
-  </svg>`;
-}
-
-function iconPokeType(catId, size = 16) {
-  const cfg = {
-    todos:       { bg: '#EF4444', shape: 'pokeball' },
-    mente:       { bg: '#A78BFA', shape: 'star'     },
-    relaciones:  { bg: '#F472B6', shape: 'heart'    },
-    crecimiento: { bg: '#34D399', shape: 'leaf'     },
-  }[catId] || { bg: '#EF4444', shape: 'pokeball' };
-
-  const inner = {
-    pokeball:
-      `<circle cx="8" cy="8" r="7" fill="${cfg.bg}"/>
-       <path d="M1 8 A7 7 0 0 1 15 8 Z" fill="white" opacity="0.45"/>
-       <line x1="1" y1="8" x2="15" y2="8" stroke="white" stroke-width="1.2"/>
-       <circle cx="8" cy="8" r="2.5" fill="white"/>`,
-    star:
-      `<circle cx="8" cy="8" r="7" fill="${cfg.bg}"/>
-       <polygon points="8,2 9.5,6 14,6 10.5,8.5 11.8,13 8,10.5 4.2,13 5.5,8.5 2,6 6.5,6" fill="white"/>`,
-    heart:
-      `<circle cx="8" cy="8" r="7" fill="${cfg.bg}"/>
-       <path d="M8 12 C8 12 3 9 3 6 A2.5 2.5 0 0 1 8 5 A2.5 2.5 0 0 1 13 6 C13 9 8 12 8 12Z" fill="white"/>`,
-    leaf:
-      `<circle cx="8" cy="8" r="7" fill="${cfg.bg}"/>
-       <path d="M8 13 Q4 8 6 4 Q10 3 12 7 Q12 11 8 13Z" fill="white"/>
-       <line x1="8" y1="13" x2="8" y2="6" stroke="${cfg.bg}" stroke-width="1"/>`,
-  }[cfg.shape];
-
-  return `<svg width="${size}" height="${size}" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${inner}</svg>`;
-}
-
-function iconPixarCat(catId, size = 16) {
-  const inner = {
-    todos:
-      `<polygon points="8,1 10,6 15,6 11,9.5 12.5,15 8,11.5 3.5,15 5,9.5 1,6 6,6" fill="#F59E0B"/>`,
-    mente:
-      `<ellipse cx="8" cy="7" rx="4" ry="4.5" fill="#FDE68A" stroke="#F59E0B" stroke-width="1"/>
-       <rect x="6" y="11" width="4" height="1.5" rx="0.5" fill="#D97706"/>
-       <rect x="6.5" y="12.5" width="3" height="1.5" rx="0.5" fill="#D97706"/>
-       <line x1="8" y1="3"   x2="8"   y2="2"   stroke="#FDE68A" stroke-width="1.2" stroke-linecap="round"/>
-       <line x1="11" y1="4.5" x2="11.8" y2="3.8" stroke="#FDE68A" stroke-width="1.2" stroke-linecap="round"/>
-       <line x1="5" y1="4.5"  x2="4.2"  y2="3.8" stroke="#FDE68A" stroke-width="1.2" stroke-linecap="round"/>`,
-    relaciones:
-      `<path d="M8 13 C8 13 2 9 2 5.5 A3 3 0 0 1 8 4 A3 3 0 0 1 14 5.5 C14 9 8 13 8 13Z" fill="#EC4899"/>`,
-    crecimiento:
-      `<circle cx="8" cy="5"   r="3"   fill="#EF4444"/>
-       <circle cx="4" cy="7.5" r="2.2" fill="#3B82F6"/>
-       <circle cx="12" cy="7.5" r="2.2" fill="#F59E0B"/>
-       <line x1="8"  y1="8"   x2="8"  y2="15" stroke="#1a1a2e" stroke-width="1" stroke-linecap="round"/>
-       <line x1="4"  y1="9.5" x2="7"  y2="14" stroke="#1a1a2e" stroke-width="1" stroke-linecap="round"/>
-       <line x1="12" y1="9.5" x2="9"  y2="14" stroke="#1a1a2e" stroke-width="1" stroke-linecap="round"/>`,
-  }[catId] || `<polygon points="8,1 10,6 15,6 11,9.5 12.5,15 8,11.5 3.5,15 5,9.5 1,6 6,6" fill="#F59E0B"/>`;
-
-  return `<svg width="${size}" height="${size}" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${inner}</svg>`;
-}
-
-function iconEmoji(emoji, size = 16) {
+function iconEmoji(emoji, size = 20) {
   return `<span style="font-size:${size}px;line-height:1">${emoji}</span>`;
 }
 
 // ── Theme definitions ─────────────────────────────────────
-// ── Animal emoji map ──────────────────────────────────────
-// Cada animal refleja la habilidad que representa.
-const ANIMAL_MAP = {
-  paciencia:           '🐢',  // tortuga — lenta y constante
-  autocontrol:         '🦉',  // búho — observa antes de actuar
-  resiliencia:         '🦅',  // águila — se levanta y vuela alto
-  confianza:           '🦁',  // león — seguro de sí mismo
-  curiosidad:          '🐒',  // mono — explora y descubre todo
-  creatividad:         '🦜',  // loro — colorido e imaginativo
-  empatia:             '🐬',  // delfín — sensible y social
-  comunicacion:        '🐦',  // pájaro — canta y se comunica
-  'trabajo-en-equipo': '🐺',  // lobo — trabaja en manada
-  generosidad:         '🐘',  // elefante — nunca olvida a los suyos
-  honestidad:          '🦊',  // zorro — conocido por su astucia, aquí lo usamos como el que no engaña
-  independencia:       '🐈',  // gato — independiente por naturaleza
-  responsabilidad:     '🐝',  // abeja — laboriosa y cumplida
-  perseverancia:       '🐜',  // hormiga — pequeña pero imparable
-  valentia:            '🦁',  // jaguar — valiente y decidido
-  gratitud:            '🦋',  // mariposa — transforma y alegra
-};
-
 const THEMES = [
   {
     id: 'animals',
     label: 'Animales',
     getTriggerIcon: () => iconEmoji('🐾', 20),
-    getCategoryIcon: () => null,
   },
   {
     id: 'pokemon',
     label: 'Pokémon',
     getTriggerIcon: () => iconPokeball(22),
-    getCategoryIcon: () => null,
   },
 ];
 
+// ── Animal emoji map ──────────────────────────────────────
+const ANIMAL_MAP = {
+  paciencia:           '🐢',
+  autocontrol:         '🦉',
+  resiliencia:         '🦅',
+  confianza:           '🦁',
+  curiosidad:          '🐒',
+  creatividad:         '🦜',
+  empatia:             '🐬',
+  comunicacion:        '🐦',
+  'trabajo-en-equipo': '🐺',
+  generosidad:         '🐘',
+  honestidad:          '🦊',
+  independencia:       '🐈',
+  responsabilidad:     '🐝',
+  perseverancia:       '🐜',
+  valentia:            '🐆',
+  gratitud:            '🦋',
+  compartir:           '🐧',
+  respeto:             '🦒',
+  amabilidad:          '🐰',
+  perdon:              '🕊️',
+  autocuidado:         '🦦',
+  concentracion:       '🦅',
+  aceptacion:          '🦎',
+  humildad:            '🐑',
+  organizacion:        '🦫',
+};
+
 // ── Pokemon IDs ───────────────────────────────────────────
+// Artwork oficial: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png
 const POKEMON_MAP = {
   paciencia:           79,   // Slowpoke
   autocontrol:         63,   // Abra
@@ -133,63 +77,18 @@ const POKEMON_MAP = {
   perseverancia:       129,  // Magikarp
   valentia:            447,  // Riolu
   gratitud:            39,   // Jigglypuff
+  compartir:           35,   // Clefairy
+  respeto:             131,  // Lapras
+  amabilidad:          176,  // Togetic
+  perdon:              440,  // Happiny
+  autocuidado:         258,  // Mudkip
+  concentracion:       202,  // Wobbuffet
+  aceptacion:          196,  // Espeon
+  humildad:            143,  // Snorlax
+  organizacion:        137,  // Porygon
 };
 
-// ── Pixar — Wikipedia REST API ────────────────────────────
-// https://en.wikipedia.org/api/rest_v1/page/summary/{title}
-// Devuelve thumbnail.source que para personajes animados es arte oficial.
-// - API oficial (Wikimedia Foundation), CORS abierto, sin API key.
-// - Las páginas de personajes Pixar tienen arte de promotional artwork.
-// - Fallback a emoji si la página no existe o no tiene thumbnail.
-const PIXAR_WIKI_MAP = {
-  paciencia:           'Dory_(Finding_Nemo)',
-  autocontrol:         'Mike_Wazowski',
-  resiliencia:         'WALL-E',
-  confianza:           'Buzz_Lightyear',
-  curiosidad:          'Remy_(Ratatouille)',
-  creatividad:         'Woody_(Toy_Story)',
-  empatia:             'Joy_(Inside_Out)',
-  comunicacion:        'Miguel_(Coco)',
-  'trabajo-en-equipo': 'Mr._Incredible',
-  generosidad:         'Sulley',
-  honestidad:          'Nemo_(Finding_Nemo)',
-  independencia:       'Merida_(Disney_character)',
-  responsabilidad:     'Carl_Fredricksen',
-  perseverancia:       'Lightning_McQueen',
-  valentia:            'Violet_Parr',
-  gratitud:            'Forky',
-};
-
-// ── Pokemon type badge SVG ────────────────────────────────
-// Pill-shaped type badge, igual al estilo del juego.
-function typeBadge(label, color, textColor = 'white', size = 20) {
-  const w = label.length * 6.5 + 14;
-  return `<svg width="${w}" height="${size}" viewBox="0 0 ${w} ${size}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="${w}" height="${size}" rx="${size / 2}" fill="${color}"/>
-    <text x="${w / 2}" y="${size * 0.7}" text-anchor="middle"
-      font-family="'Baloo 2', sans-serif" font-size="9" font-weight="800"
-      fill="${textColor}" letter-spacing="0.5">${label}</text>
-  </svg>`;
-}
-
-// Tipos Pokémon para cada sección del detalle
-const POKE_SECTION_ICONS = {
-  why:      () => typeBadge('PSI',    '#F95587'),   // Psychic → reflexión mental
-  examples: () => typeBadge('NORMAL', '#9A9A78'),   // Normal  → vida cotidiana
-  exercise: () => typeBadge('LUCHA',  '#C03028'),   // Fighting → entrenamiento
-  history:  () => typeBadge('OBJETO', '#B8A038'),   // Item     → registro/diario
-};
-
-// Icono de sección: ningún tema tiene iconos en los acordeones
-function getThemedSectionIcon() { return null; }
-
-// Historial: solo texto, sin icono
-function getThemedHistoryIcon() { return null; }
-
-// Toast: solo texto, sin emoji
-function getThemedToastSuccess(conceptTitle) {
-  return `¡Práctica de ${conceptTitle} registrada!`;
-}
+// ── URL builder ───────────────────────────────────────────
 function getPokemonUrl(conceptId) {
   const id = POKEMON_MAP[conceptId];
   return id
@@ -205,17 +104,10 @@ function preloadAllImages() {
   });
 }
 
-// ── Theme helpers ─────────────────────────────────────────
-function getActiveThemeDef() {
-  return THEMES.find(t => t.id === window._activeTheme) || THEMES[0];
-}
-
-function getCategoryIcon(catId) {
-  return getActiveThemeDef().getCategoryIcon(catId);
-}
-
+// ── Trigger icon ──────────────────────────────────────────
 function getThemeTriggerIcon() {
-  return getActiveThemeDef().getTriggerIcon();
+  const theme = THEMES.find(t => t.id === window._activeTheme) || THEMES[0];
+  return theme.getTriggerIcon();
 }
 
 // ── Display helpers ───────────────────────────────────────
@@ -232,7 +124,6 @@ function getConceptDisplay(concept, size) {
     );
   }
 
-  // animals theme (and any future theme without images)
   const emoji = window._activeTheme === 'animals'
     ? (ANIMAL_MAP[concept.id] || concept.emoji)
     : concept.emoji;

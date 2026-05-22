@@ -126,7 +126,7 @@ function makeExercise(concept) {
     });
 
     Storage.saveSession(concept.id, fullInputs);
-    showToast(getThemedToastSuccess(concept.title));
+    showToast(`¡Práctica de ${concept.title} registrada!`);
     wrap.removeChild(btn);
 
     const existing = document.getElementById('concept-history');
@@ -144,8 +144,7 @@ function makeExercise(concept) {
 function makeHistoryInline(conceptId, color) {
   const history = Storage.getHistory()[conceptId] || [];
   const wrap    = el('div', 'history-inline');
-  const histIcon = getThemedHistoryIcon();
-  wrap.innerHTML = `<p class="history-title">${histIcon ? `<span class="history-icon">${histIcon}</span> ` : ''}Tus prácticas de este concepto</p>`;
+  wrap.innerHTML = `<p class="history-title">Tus prácticas de este concepto</p>`;
 
   if (!history.length) {
     wrap.innerHTML += `<p class="history-empty">Aún no hay prácticas registradas.</p>`;
