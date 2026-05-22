@@ -88,7 +88,59 @@ const POKEMON_MAP = {
   organizacion:        137,  // Porygon
 };
 
-// ── URL builder ───────────────────────────────────────────
+// ── Tier system ───────────────────────────────────────────
+const TIERS = [
+  { min: 0,  label: null,     border: null,      cardBg: null,      heroBg: null      },
+  { min: 1,  label: 'Bronce', border: '#CD7F32', cardBg: '#FEF9F0', heroBg: '#FEF3E2' },
+  { min: 3,  label: 'Plata',  border: '#94A3B8', cardBg: '#F8FAFC', heroBg: '#F1F5F9' },
+  { min: 6,  label: 'Oro',    border: '#F59E0B', cardBg: '#FFFBEB', heroBg: '#FEF9C3' },
+  { min: 10, label: 'Élite',  border: '#7C3AED', cardBg: '#FAF5FF', heroBg: '#EDE9FE' },
+];
+
+function getTier(conceptId) {
+  const count = Storage.getCount(conceptId);
+  let tier = TIERS[0];
+  for (const t of TIERS) {
+    if (count >= t.min) tier = t;
+  }
+  return { ...tier, count };
+}
+
+// Badge solo para el detalle
+function getTierBadgeHtml(conceptId) {
+  const tier = getTier(conceptId);
+  if (!tier.label) return '';
+  return `<span class="tier-badge tier-badge--detail" style="border:2px solid ${tier.border};color:${tier.border}">${tier.label} · ${tier.count}×</span>`;
+}
+// 0 = sin prácticas, 1 = 1-2, 2 = 3-5, 3 = 6+
+function getGlowLevel(conceptId) {
+  const n = Storage.getCount(conceptId);
+  if (n === 0) return 0;
+  if (n <= 2)  return 1;
+  if (n <= 5)  return 2;
+  return 3;
+}
+
+function glowFilter(level, color) {
+  if (level === 0) return '';
+  const { r, g, b } = hexToRgb(color);
+  const configs = [
+    null,
+    `drop-shadow(0 0 5px rgba(${r},${g},${b},0.6))`,
+    `drop-shadow(0 0 10px rgba(${r},${g},${b},0.85)) drop-shadow(0 0 4px rgba(${r},${g},${b},0.6))`,
+    `drop-shadow(0 0 16px rgba(${r},${g},${b},1)) drop-shadow(0 0 6px rgba(${r},${g},${b},0.9)) drop-shadow(0 0 2px rgba(${r},${g},${b},1))`,
+  ];
+  return configs[level];
+}
+
+function hexToRgb(hex) {
+  const h = hex.replace('#', '');
+  return {
+    r: parseInt(h.slice(0,2), 16),
+    g: parseInt(h.slice(2,4), 16),
+    b: parseInt(h.slice(4,6), 16),
+  };
+}
 function getPokemonUrl(conceptId) {
   const id = POKEMON_MAP[conceptId];
   return id
@@ -112,14 +164,18 @@ function getThemeTriggerIcon() {
 
 // ── Display helpers ───────────────────────────────────────
 function getConceptDisplay(concept, size) {
-  const px = size === 'detail' ? '96' : '56';
+  const px    = size === 'detail' ? '96' : '56';
+  const level = getGlowLevel(concept.id);
+  const color = concept.color;
+  const filt  = glowFilter(level, color);
 
   if (window._activeTheme === 'pokemon') {
     const url = getPokemonUrl(concept.id);
-    if (!url) return `<span class="concept-emoji">${concept.emoji}</span>`;
+    if (!url) return `<span class="concept-emoji" style="${filt ? `filter:${filt}` : ''}">${concept.emoji}</span>`;
     return (
       `<img class="concept-img concept-img--poke" src="${url}" ` +
-      `alt="${concept.title}" width="${px}" height="${px}" loading="eager" data-fallback="${concept.emoji}">` +
+      `alt="${concept.title}" width="${px}" height="${px}" loading="eager" ` +
+      `style="${filt ? `filter:${filt}` : ''}" data-fallback="${concept.emoji}">` +
       `<span class="concept-emoji" style="display:none">${concept.emoji}</span>`
     );
   }
@@ -128,5 +184,13 @@ function getConceptDisplay(concept, size) {
     ? (ANIMAL_MAP[concept.id] || concept.emoji)
     : concept.emoji;
 
-  return `<span class="concept-emoji">${emoji}</span>`;
+  const { r, g, b } = hexToRgb(color);
+  const bgStyles = [
+    '',
+    `background:rgba(${r},${g},${b},0.15);border-radius:50%;padding:4px;`,
+    `background:rgba(${r},${g},${b},0.28);border-radius:50%;padding:6px;`,
+    `background:rgba(${r},${g},${b},0.42);border-radius:50%;padding:8px;box-shadow:0 0 0 4px rgba(${r},${g},${b},0.25);`,
+  ];
+
+  return `<span class="concept-emoji" style="${bgStyles[level]}">${emoji}</span>`;
 }

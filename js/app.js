@@ -5,19 +5,29 @@ window._activeTab      = 'habilidades'; // 'habilidades' | 'nocivos'
 
 // ── Card builder ───────────────────────────────────────────
 function buildCard(c, isNocivo) {
-  const count = Storage.getCount(c.id);
-  const card  = el('div', `card${isNocivo ? ' card--nocivo' : ''}${count > 0 ? ' explored' : ''}`);
-  card.style.setProperty('--c', c.color);
+  const tier  = getTier(c.id);
+  const card  = el('div', `card${isNocivo ? ' card--nocivo' : ''}${tier.count > 0 ? ' explored' : ''}`);
+  card.style.setProperty('--c', tier.stripeColor || c.color);
+  card.style.background   = tier.cardBg;
+  card.style.borderColor  = tier.border;
 
   const display = getConceptDisplay(c, 'card');
 
+  const stripeColor = tier.stripeColor || c.color;
+  const tagColor    = tier.tagColor    || c.color;
+  const titleColor  = tier.titleColor;
+  const glowColor   = tier.glowColor   || c.color;
+  const pillHtml    = tier.label
+    ? `<span class="card-tier-pill" style="background:${tier.pillBg};color:${tier.pillText}">${tier.label}</span>`
+    : '';
+
   card.innerHTML =
-    (isNocivo ? '' : '<div class="card-stripe"></div>') +
-    '<div class="card-glow"></div>' +
-    (count > 0 ? `<span class="card-badge">${count}×</span>` : '') +
+    (isNocivo ? '' : `<div class="card-stripe" style="background:${stripeColor}"></div>`) +
+    `<div class="card-glow" style="background:${glowColor}"></div>` +
+    pillHtml +
     `<div class="card-display">${display}</div>` +
-    `<span class="card-title">${c.title}</span>` +
-    `<span class="card-tagline">${c.tagline}</span>`;
+    `<span class="card-title" style="color:${titleColor}">${c.title}</span>` +
+    `<span class="card-tagline" style="color:${tagColor}">${c.tagline}</span>`;
 
   card.addEventListener('click', () => goDetail(c.id));
   return card;
@@ -124,16 +134,26 @@ function renderDetail(id) {
     `</div>`
   ).join('');
 
+  const tier       = getTier(c.id);
+  const heroBg     = tier.heroBg;
+  const titleColor = tier.titleColor;
+  const tagColor   = tier.tagColor || c.color;
+  const stripe     = tier.stripeColor || c.color;
+
+  // Fondo general del detalle (igual que la tarjeta)
+  view.style.background = heroBg;
+
   view.innerHTML =
-    `<nav class="detail-nav">` +
+    `<nav class="detail-nav" style="background:${heroBg}">` +
       `<button class="back-btn" id="back-btn">← Volver</button>` +
     `</nav>` +
-    `<div class="detail-hero${isNocivo ? ' detail-hero--nocivo' : ''}">` +
-      `<span class="detail-stripe"></span>` +
+    `<div class="detail-hero${isNocivo ? ' detail-hero--nocivo' : ''}" style="background:${heroBg}">` +
+      `<span class="detail-stripe" style="background:${stripe}"></span>` +
       `<div class="detail-glow"></div>` +
       `<div class="detail-display-wrap">${display}</div>` +
-      `<h1 class="detail-title">${c.title}</h1>` +
-      `<p class="detail-tagline">${c.tagline}</p>` +
+      `<h1 class="detail-title" style="color:${titleColor}">${c.title}</h1>` +
+      `<p class="detail-tagline" style="color:${tagColor}">${c.tagline}</p>` +
+      `<div id="detail-tier" class="detail-tier">${getTierBadgeHtml(c.id)}</div>` +
     `</div>` +
     `<div class="detail-body" id="detail-body"></div>`;
 

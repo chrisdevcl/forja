@@ -117,7 +117,6 @@ function makeExercise(concept) {
   btn.addEventListener('click', () => {
     if (btn.disabled) return;
 
-    // Guardar como pares {q, a} para mostrar contexto en el historial
     const fullInputs = {};
     concept.exercise.steps.forEach((step, i) => {
       if (step.input && inputs[i]?.trim()) {
@@ -127,8 +126,50 @@ function makeExercise(concept) {
 
     Storage.saveSession(concept.id, fullInputs);
     showToast(`¡Práctica de ${concept.title} registrada!`);
-    wrap.removeChild(btn);
 
+    // 1. Actualizar todos los colores del tier en el detalle
+    const newTier = getTier(concept.id);
+    const newBg     = newTier.heroBg;
+    const newStripe = newTier.stripeColor || concept.color;
+    const newTitle  = newTier.titleColor;
+    const newTag    = newTier.tagColor || concept.color;
+
+    const view = document.getElementById('view-detail');
+    if (view) view.style.background = newBg;
+
+    const nav = document.querySelector('.detail-nav');
+    if (nav) nav.style.background = newBg;
+
+    const hero = document.querySelector('.detail-hero');
+    if (hero) hero.style.background = newBg;
+
+    const stripeEl = document.querySelector('.detail-stripe');
+    if (stripeEl) stripeEl.style.background = newStripe;
+
+    const titleEl = document.querySelector('.detail-title');
+    if (titleEl) titleEl.style.color = newTitle;
+
+    const tagEl = document.querySelector('.detail-tagline');
+    if (tagEl) tagEl.style.color = newTag;
+
+    const displayWrap = document.querySelector('.detail-display-wrap');
+    if (displayWrap) displayWrap.innerHTML = getConceptDisplay(concept, 'detail');
+
+    const tierWrap = document.getElementById('detail-tier');
+    if (tierWrap) tierWrap.innerHTML = getTierBadgeHtml(concept.id);
+
+    // 2. Limpiar el formulario: desmarcar pasos y vaciar inputs
+    wrap.querySelectorAll('.ex-checkbox.checked').forEach(cb => {
+      cb.classList.remove('checked');
+      cb.innerHTML = '';
+    });
+    wrap.querySelectorAll('.ex-step.done').forEach(s => s.classList.remove('done'));
+    wrap.querySelectorAll('.ex-input').forEach(inp => { inp.value = ''; });
+    Object.keys(inputs).forEach(k => delete inputs[k]);
+    checked.clear();
+    updateBtn();
+
+    // 3. Actualizar historial
     const existing = document.getElementById('concept-history');
     if (existing) {
       existing.innerHTML = '';
