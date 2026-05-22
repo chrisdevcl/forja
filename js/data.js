@@ -412,3 +412,134 @@ const CONCEPTS = [
             ]},
     },
 ];
+
+const NOCIVOS = [
+  {
+    id: 'envidia', emoji: '😒', title: 'Envidia', color: '#78716C',
+    tagline: '¿Por qué me molesta que a otros les vaya bien?',
+    why: 'La envidia hace que el éxito de otros te genere rabia en vez de alegría. Te mantiene enfocado/a en lo que no tienes y te impide ver lo que sí tienes. Cuanto más la alimentas, más difícil se vuelve celebrar lo bueno que le pasa a quienes te rodean, y eso daña las amistades.',
+    examples: [
+      { icon: '📝', text: 'Ver que un compañero/a sacó mejor nota y sentir rabia en vez de alegría por él o ella.' },
+      { icon: '👟', text: 'Querer exactamente lo que tiene otro/a sin valorar lo que ya tienes tú.' },
+      { icon: '🎉', text: 'Que te cueste celebrar los logros de tus amigos como si fueran propios.' },
+    ],
+    exercise: { title: 'De la Envidia a la Motivación', steps: [
+      { text: 'Piensa en algo que tiene otra persona y que te genera envidia.', input: { placeholder: '¿Qué es y de quién?' } },
+      { text: '¿Qué te dice eso sobre algo que tú quieres o valoras?', input: { placeholder: 'Creo que en realidad quiero...' } },
+      { text: '¿Hay algo que puedas hacer para acercarte a lo que quieres?', input: { placeholder: 'Podría...' } },
+      { text: 'Hoy felicita o reconoce a esa persona por lo que logró, aunque cueste.' },
+    ]},
+  },
+  {
+    id: 'egoismo', emoji: '🫙', title: 'Egoísmo', color: '#78716C',
+    tagline: '¿Estoy pensando solo en mí?',
+    why: 'El egoísmo pone tus ganas siempre por encima de las de los demás. Cuando una persona actúa así de forma constante, las relaciones se rompen porque nadie quiere estar cerca de alguien que nunca considera a los otros. Deja a quienes te rodean sintiéndose ignorados e irrelevantes.',
+    examples: [
+      { icon: '🎮', text: 'Querer siempre elegir el juego, la película o el lugar, sin preguntar a los demás.' },
+      { icon: '🍰', text: 'Tomar la parte más grande sin pensar si otros también quieren.' },
+      { icon: '🙉', text: 'Hablar mucho de uno mismo sin preguntar cómo está la otra persona.' },
+    ],
+    exercise: { title: 'El Turno de los Demás', steps: [
+      { text: '¿Hubo alguna situación reciente donde pusiste tus ganas por encima de las de todos?', input: { placeholder: '¿Qué pasó?' } },
+      { text: '¿Cómo crees que se sintió la otra persona?', input: { placeholder: 'Creo que se sintió...' } },
+      { text: 'Esta semana, en una situación donde normalmente elegirías tú, deja que otro/a elija.', input: { placeholder: '¿En qué situación lo harás?' } },
+      { text: '¿Cómo te sentiste al hacerlo?', input: { placeholder: 'Me sentí...' } },
+    ]},
+  },
+  {
+    id: 'agresividad', emoji: '💢', title: 'Agresividad', color: '#78716C',
+    tagline: '¿Reacciono de formas que lastiman?',
+    why: 'La agresividad daña a las personas que la reciben y destruye la confianza que habían depositado en ti. Golpear, gritar o insultar no resuelve nada: empeora la situación y aleja a quienes te importan. Las emociones fuertes son normales, pero reaccionar con agresividad no es una forma aceptable de expresarlas.',
+    examples: [
+      { icon: '😤', text: 'Gritar o insultar cuando algo no sale como querías.' },
+      { icon: '👊', text: 'Empujar, golpear o romper cosas cuando estás frustrado/a.' },
+      { icon: '💬', text: 'Decir cosas hirientes en el momento de rabia que después lamentas.' },
+    ],
+    exercise: { title: 'La Válvula de Escape', steps: [
+      { text: '¿Cuándo fue la última vez que reaccionaste de forma agresiva? ¿Qué lo provocó?', input: { placeholder: '¿Qué pasó y cómo reaccioné?' } },
+      { text: '¿Qué emoción había detrás de esa reacción?', input: { placeholder: 'Lo que sentía en realidad era...' } },
+      { text: 'Piensa en 2 cosas que podrías hacer en vez de reaccionar agresivamente la próxima vez.', input: { placeholder: 'Podría... o podría...' } },
+      { text: 'Practica una de esas alternativas esta semana cuando sientas que se acerca esa emoción.' },
+    ]},
+  },
+  {
+    id: 'mentira', emoji: '🎭', title: 'Mentira', color: '#78716C',
+    tagline: '¿Digo lo que no es verdad?',
+    why: 'Mentir nunca está bien, aunque en el momento parezca la salida más fácil. Cuando mientes, las personas dejan de saber qué creer de lo que dices, y recuperar esa confianza es muy difícil. Si quieres evitar una situación incómoda, la alternativa siempre es no decir nada, cambiar el tema o decir "prefiero no responder". El silencio siempre es mejor que una mentira.',
+    examples: [
+      { icon: '📚', text: 'Decir que hiciste la tarea cuando no la hiciste, en vez de reconocerlo.' },
+      { icon: '🤕', text: 'Inventar excusas o culpar a otros cuando eres tú quien se equivocó.' },
+      { icon: '🗣️', text: 'Cambiar los detalles de lo que pasó para quedar mejor parado/a.' },
+    ],
+    exercise: { title: 'La Mejor Alternativa', steps: [
+      { text: '¿Hubo alguna vez que mentiste para evitar algo? ¿Qué pasó después?', input: { placeholder: '¿Qué mentiste y qué consecuencias tuvo?' } },
+      { text: '¿Qué podrías haber dicho o hecho en vez de mentir? (Silencio, "prefiero no responder", o la verdad directa.)', input: { placeholder: 'La mejor alternativa habría sido...' } },
+      { text: 'Piensa en algo difícil que tienes pendiente de decir. ¿Hay una forma honesta de manejarlo sin mentir?', input: { placeholder: 'Lo que podría hacer es...' } },
+      { text: 'Da un paso esta semana hacia esa alternativa honesta.' },
+    ]},
+  },
+  {
+    id: 'exclusion', emoji: '🚪', title: 'Exclusión', color: '#78716C',
+    tagline: '¿Dejo a alguien fuera a propósito?',
+    why: 'Excluir a alguien es una forma de hacerle daño sin necesidad de golpear. Quien lo sufre puede sentirse invisible, indigno e incapaz de encajar en ningún lugar. Ese daño puede durar mucho tiempo. Dejar a alguien fuera a propósito, aunque parezca algo pequeño, tiene consecuencias reales en quien lo recibe.',
+    examples: [
+      { icon: '👥', text: 'Decirle a alguien "este grupo es solo para nosotros, tú no puedes estar".' },
+      { icon: '🤫', text: 'Hablar en secreto o reírse de algo frente a alguien para que se sienta fuera.' },
+      { icon: '📵', text: 'Ignorar a alguien en el grupo de mensajes o en el recreo como si no existiera.' },
+    ],
+    exercise: { title: 'El Lugar de Quien Queda Afuera', steps: [
+      { text: '¿Hubo alguna vez que excluiste a alguien o participaste en excluirlo?', input: { placeholder: '¿Qué pasó?' } },
+      { text: 'Imagínate en el lugar de esa persona. ¿Cómo te habría sentido?', input: { placeholder: 'Me habría sentido...' } },
+      { text: '¿Hay alguien en tu entorno que quede fuera seguido? ¿Qué podrías hacer?', input: { placeholder: 'Podría...' } },
+      { text: 'Esta semana incluye activamente a alguien que normalmente no está en el grupo.' },
+    ]},
+  },
+  {
+    id: 'rencor', emoji: '🪨', title: 'Rencor', color: '#78716C',
+    tagline: '¿Guardo lo que me hicieron para siempre?',
+    why: 'El rencor te mantiene atado/a a algo que ya pasó e impide que sigas adelante. Mientras lo cargas, gastar energía en seguir enojado/a no cambia lo que ocurrió ni hace justicia. Solo te daña a ti y bloquea la posibilidad de sanar o reparar la relación.',
+    examples: [
+      { icon: '😠', text: 'Seguir enojado/a con alguien semanas o meses después de algo que pasó.' },
+      { icon: '🔁', text: 'Revivir constantemente situaciones pasadas que te generaron rabia o tristeza.' },
+      { icon: '🚫', text: 'Negarte a hablar o arreglar algo con alguien porque "lo que hizo no tiene perdón".' },
+    ],
+    exercise: { title: 'Soltar el Peso', steps: [
+      { text: '¿Hay alguien con quien guardas rencor? ¿Qué pasó?', input: { placeholder: '¿Qué pasó y cuánto tiempo llevas cargando eso?' } },
+      { text: '¿Cómo te afecta seguir pensando en eso?', input: { placeholder: 'Me afecta porque...' } },
+      { text: 'Soltar no es decir que estuvo bien. ¿Qué necesitarías para no seguir cargando ese peso?', input: { placeholder: 'Necesitaría...' } },
+      { text: 'Decide una cosa concreta que harás para empezar a soltarlo, aunque sea pequeña.' },
+    ]},
+  },
+  {
+    id: 'compararse', emoji: '⚖️', title: 'Compararse', color: '#78716C',
+    tagline: '¿Me mido siempre contra otros?',
+    why: 'Medirse constantemente con otros destruye la autoestima. Siempre habrá alguien más rápido, más inteligente o más popular, así que usarlos como medida de tu valor hace que nunca sea suficiente. Además te impide ver tu propio progreso, que es lo único que realmente importa.',
+    examples: [
+      { icon: '📊', text: 'Ver las notas de otros y sentir que eres "menos" si las tuyas son más bajas.' },
+      { icon: '📱', text: 'Ver lo que publican otros en redes y sentir que tu vida es aburrida o peor.' },
+      { icon: '🏃', text: 'Desmotivarte cuando alguien hace algo mejor que tú en vez de enfocarte en tu propio progreso.' },
+    ],
+    exercise: { title: 'Mi Propio Marcador', steps: [
+      { text: '¿Con quién te comparas seguido? ¿En qué aspecto?', input: { placeholder: 'Me comparo con... en...' } },
+      { text: '¿Qué logros propios estás ignorando cuando te comparas?', input: { placeholder: 'Estoy ignorando que yo...' } },
+      { text: 'Escribe 3 cosas en las que has mejorado en el último mes, comparado con TI mismo/a.', input: { placeholder: 'Mejoré en...\nMejoré en...\nMejoré en...' } },
+      { text: 'Esta semana, cuando notes que te comparas, vuelve a tu lista y léela.' },
+    ]},
+  },
+  {
+    id: 'impulsividad', emoji: '⚡', title: 'Impulsividad', color: '#78716C',
+    tagline: '¿Actúo antes de pensar?',
+    why: 'Reaccionar antes de pensar arruina situaciones que podrían haberse resuelto bien. Las palabras o acciones impulsivas dañan a otras personas y rompen la confianza, y después es difícil reparar ese daño. Tomar un segundo antes de reaccionar marca la diferencia entre resolver y empeorar las cosas.',
+    examples: [
+      { icon: '🗣️', text: 'Decir lo primero que se te viene a la mente aunque lastime a alguien.' },
+      { icon: '🏃', text: 'Salir corriendo de una situación difícil en vez de quedarte a resolverla.' },
+      { icon: '📲', text: 'Enviar un mensaje enojado y arrepentirte después de enviarlo.' },
+    ],
+    exercise: { title: 'El Segundo Antes', steps: [
+      { text: '¿Cuándo fue la última vez que actuaste impulsivamente y lo lamentaste?', input: { placeholder: '¿Qué pasó?' } },
+      { text: '¿Qué habrías hecho diferente si hubieras tenido 10 segundos para pensar?', input: { placeholder: 'Con más tiempo habría...' } },
+      { text: 'Esta semana, cuando sientas que quieres reaccionar de inmediato, cuenta hasta 5 antes de hacerlo.' },
+      { text: '¿Hubo alguna situación donde lo intentaste? ¿Cambió algo?', input: { placeholder: 'Lo intenté cuando... y pasó...' } },
+    ]},
+  },
+];
