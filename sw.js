@@ -1,16 +1,16 @@
 const CACHE = 'forja-v1';
 
 const PRECACHE = [
-  '/',
-  '/index.html',
-  '/css/styles.css',
-  '/js/storage.js',
-  '/js/data.js',
-  '/js/themes.js',
-  '/js/components.js',
-  '/js/app.js',
-  '/favicon.svg',
-  '/manifest.json',
+  './',
+  './index.html',
+  './css/styles.css',
+  './js/storage.js',
+  './js/data.js',
+  './js/themes.js',
+  './js/components.js',
+  './js/app.js',
+  './favicon.svg',
+  './manifest.json',
 ];
 
 // Instalación: precachear los archivos del app
