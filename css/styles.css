@@ -439,3 +439,49 @@ body {
   z-index: 2;
   min-height: 28px;
 }
+
+/* ── TAB EMOCIONES ── */
+.tab-btn--emocion.active {
+  color: #6366F1;
+}
+.tab-btn--emocion.active::after { background: #6366F1; }
+
+/* Card emocion */
+.card--emocion {
+  background: #F5F3FF;
+  border: 2px solid #C7D2FE;
+}
+.card--emocion:hover { box-shadow: 0 6px 20px rgba(99,102,241,0.12); }
+.card--emocion .card-glow { opacity: 0.08; }
+
+/* Emotion detail steps */
+.emo-tool { padding-top: 8px; }
+
+.emo-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 9px 0;
+  border-bottom: 1px solid #F2F1EE;
+}
+.emo-step:last-child { border-bottom: none; }
+
+.emo-step-num {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #6366F1;
+  color: white;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.emo-step-text {
+  font-size: 0.87rem;
+  line-height: 1.55;
+  color: #4A4A5A;
+  font-weight: 500;
+}

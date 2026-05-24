@@ -76,12 +76,15 @@ function renderHome() {
 
   const tab1 = el('button', `tab-btn${window._activeTab === 'habilidades' ? ' active' : ''}`, 'Quién quiero ser');
   const tab2 = el('button', `tab-btn tab-btn--nocivo${window._activeTab === 'nocivos' ? ' active' : ''}`, 'Qué quiero evitar');
+  const tab3 = el('button', `tab-btn tab-btn--emocion${window._activeTab === 'emociones' ? ' active' : ''}`, 'Cuando me siento...');
 
   tab1.addEventListener('click', () => { window._activeTab = 'habilidades'; renderHome(); });
   tab2.addEventListener('click', () => { window._activeTab = 'nocivos';     renderHome(); });
+  tab3.addEventListener('click', () => { window._activeTab = 'emociones';   renderHome(); });
 
   tabBar.appendChild(tab1);
   tabBar.appendChild(tab2);
+  tabBar.appendChild(tab3);
   home.appendChild(tabBar);
 
   // ── Tab: Habilidades ─────────────────────────────────────
@@ -114,6 +117,23 @@ function renderHome() {
   if (window._activeTab === 'nocivos') {
     const grid = el('div', 'grid');
     NOCIVOS.forEach(c => grid.appendChild(buildCard(c, true)));
+    home.appendChild(grid);
+  }
+
+  // ── Tab: Cuando me siento... ─────────────────────────────
+  if (window._activeTab === 'emociones') {
+    const grid = el('div', 'grid');
+    EMOCIONES.forEach(e => {
+      const card = el('div', 'card card--emocion');
+      const display = getConceptDisplay(e, 'card');
+      card.innerHTML =
+        '<div class="card-glow" style="background:#6366F1"></div>' +
+        `<div class="card-display">${display}</div>` +
+        `<span class="card-title">${e.title}</span>` +
+        `<span class="card-tagline" style="color:#6366F1">${e.tagline}</span>`;
+      card.addEventListener('click', () => goEmotionDetail(e.id));
+      grid.appendChild(card);
+    });
     home.appendChild(grid);
   }
 }
@@ -173,7 +193,57 @@ function renderDetail(id) {
   body.appendChild(historyContainer);
 }
 
-// ── Theme change ───────────────────────────────────────────
+// ── Emotion detail ─────────────────────────────────────────
+function renderEmotionDetail(id) {
+  const e    = EMOCIONES.find(x => x.id === id);
+  const view = document.getElementById('view-detail');
+
+  const EMOCION_COLOR = '#6366F1';
+  view.style.background = '#F5F3FF';
+
+  const display = getConceptDisplay(e, 'detail');
+
+  view.innerHTML =
+    `<nav class="detail-nav" style="background:#F5F3FF">` +
+      `<button class="back-btn" id="back-btn">← Volver</button>` +
+    `</nav>` +
+    `<div class="detail-hero" style="background:#F5F3FF">` +
+      `<span class="detail-stripe" style="background:${EMOCION_COLOR}"></span>` +
+      `<div class="detail-glow"></div>` +
+      `<div class="detail-display-wrap">${display}</div>` +
+      `<h1 class="detail-title" style="color:#1A1A2E">${e.title}</h1>` +
+      `<p class="detail-tagline" style="color:${EMOCION_COLOR}">${e.tagline}</p>` +
+    `</div>` +
+    `<div class="detail-body" id="detail-body"></div>`;
+
+  document.getElementById('back-btn').addEventListener('click', goHome);
+
+  const body = document.getElementById('detail-body');
+
+  // ¿Qué es esto?
+  body.appendChild(makeSection(null, '¿Qué es esto?', `<p class="why-text">${e.what}</p>`, true));
+
+  // Herramientas
+  e.tools.forEach((tool, i) => {
+    const stepsHtml = tool.steps.map((s, j) =>
+      `<div class="emo-step">` +
+        `<span class="emo-step-num">${j + 1}</span>` +
+        `<span class="emo-step-text">${s}</span>` +
+      `</div>`
+    ).join('');
+    const wrap = document.createElement('div');
+    wrap.className = 'emo-tool';
+    wrap.innerHTML = stepsHtml;
+    body.appendChild(makeSection(null, tool.title, wrap, i === 0));
+  });
+}
+
+function goEmotionDetail(id) {
+  renderEmotionDetail(id);
+  document.getElementById('view-home').style.display = 'none';
+  document.getElementById('view-detail').classList.add('active');
+  window.scrollTo(0, 0);
+}
 function onThemeChange(themeId) {
   window._activeTheme = themeId;
   Storage.saveTheme(themeId);

@@ -543,3 +543,106 @@ const NOCIVOS = [
     ]},
   },
 ];
+
+const EMOCIONES = [
+  {
+    id: 'preocupacion', emoji: '😟', title: 'Preocupación',
+    tagline: 'Mi cabeza no para de pensar',
+    what: 'Preocuparte es imaginar que algo malo podría pasar. El cerebro lo hace para intentar protegerte, pero a veces se queda dando vueltas sin parar aunque no haya ningún peligro real.',
+    tools: [
+      { title: 'El tiempo de preocupación', steps: ['Dite a ti mismo: "Me preocuparé de esto a las [hora específica], no ahora."', 'Cuando llegue esa hora, pregúntate: ¿sigue siendo un problema real?', 'Si sí, piensa en UNA cosa concreta que puedas hacer. Si no, ciérralo.'] },
+      { title: 'La pregunta del 1 al 10', steps: ['Ponle nota a tu preocupación del 1 al 10 según qué tan probable es que pase realmente.', 'Luego pregúntate: ¿qué es lo peor que podría pasar? ¿Y qué tan seguido pasa realmente eso?'] },
+      { title: 'Respiración 4-7-8', steps: ['Inhala contando hasta 4.', 'Aguanta el aire contando hasta 7.', 'Suelta lentamente contando hasta 8.', 'Repite 3 veces.'] },
+    ],
+  },
+  {
+    id: 'ansiedad', emoji: '😰', title: 'Ansiedad',
+    tagline: 'Me late fuerte el corazón sin razón',
+    what: 'La ansiedad es cuando tu cuerpo reacciona como si hubiera un peligro, aunque no haya ninguno visible. Puedes sentir el corazón acelerado, el estómago apretado o ganas de escapar. Es incómodo pero no es peligroso.',
+    tools: [
+      { title: 'El 5-4-3-2-1', steps: ['Nombra 5 cosas que puedes VER ahora mismo.', 'Nombra 4 cosas que puedes TOCAR.', 'Nombra 3 cosas que puedes OÍR.', 'Nombra 2 cosas que puedes OLER.', 'Nombra 1 cosa que puedes SABOREAR.'] },
+      { title: 'Respiración cuadrada', steps: ['Inhala 4 segundos.', 'Aguanta 4 segundos.', 'Exhala 4 segundos.', 'Espera 4 segundos.', 'Repite hasta que el cuerpo se calme.'] },
+      { title: 'Habla con tu cuerpo', steps: ['Identifica dónde sientes la ansiedad en tu cuerpo (pecho, estómago, garganta).', 'Pon tu mano ahí.', 'Respira hacia ese lugar y dite: "Esto es incómodo pero va a pasar."'] },
+    ],
+  },
+  {
+    id: 'frustracion', emoji: '😤', title: 'Frustración',
+    tagline: 'Nada sale como quiero',
+    what: 'La frustración aparece cuando algo no sale como esperabas o cuando sientes que no puedes con algo. Es una señal de que te importa lo que estás haciendo, no de que eres incapaz.',
+    tools: [
+      { title: 'Pausa activa', steps: ['Para completamente lo que estás haciendo.', 'Haz algo físico por 2 minutos: camina, salta, sacúdete.', 'Vuelve con los ojos frescos.'] },
+      { title: 'Reformula el problema', steps: ['Escribe o di en voz alta qué es exactamente lo que no está saliendo.', 'Pregúntate: ¿qué he intentado hasta ahora?', 'Piensa en UNA forma diferente de abordarlo.'] },
+      { title: 'El límite de hoy', steps: ['Reconoce que hoy tienes un límite de energía y está bien llegar a él.', 'Dite: "Lo dejé aquí por hoy y mañana lo intento de nuevo."', 'Haz algo que te recargue antes de volver a intentarlo.'] },
+    ],
+  },
+  {
+    id: 'miedo', emoji: '😨', title: 'Miedo',
+    tagline: 'Hay algo que me da pánico',
+    what: 'El miedo es una emoción que te avisa de un posible peligro. A veces el peligro es real, a veces es solo imaginado. En los dos casos, lo que sientes en el cuerpo es igual de intenso. El miedo no significa que seas cobarde.',
+    tools: [
+      { title: 'Separa real de imaginado', steps: ['Pregúntate: ¿el peligro está pasando ahora mismo o es algo que podría pasar?', 'Si es ahora: busca a un adulto de confianza.', 'Si es imaginado: dite "mi cerebro está tratando de protegerme, pero estoy a salvo ahora mismo."'] },
+      { title: 'Exposición pequeña', steps: ['Identifica qué es exactamente lo que te da miedo.', 'Piensa en el paso MÁS PEQUEÑO posible hacia enfrentarlo.', 'Da solo ese paso. Nada más por hoy.'] },
+      { title: 'El objeto ancla', steps: ['Elige un objeto que puedas tocar (una piedra, un llavero, una goma).', 'Cuando sientas miedo, tócalo y concéntrate en cómo se siente.', 'Eso le dice a tu cerebro que estás en el presente y a salvo.'] },
+    ],
+  },
+  {
+    id: 'tristeza', emoji: '😢', title: 'Tristeza',
+    tagline: 'No tengo ganas de nada',
+    what: 'La tristeza aparece cuando pierdes algo importante, cuando te sientes solo/a o cuando algo duele. Sentirse triste es completamente normal y necesario. No hay que apurarse a que pase.',
+    tools: [
+      { title: 'Permítete sentirla', steps: ['No intentes tapar la tristeza con distracciones.', 'Dale un tiempo fijo: "Voy a sentir esto 10 minutos."', 'Llora si necesitas. El cuerpo lo necesita a veces.'] },
+      { title: 'Muévete', steps: ['Sal a caminar aunque sea 10 minutos.', 'No es para olvidarte, es para que tu cuerpo libere lo que está cargando.'] },
+      { title: 'Conéctate con alguien', steps: ['No tienes que explicar todo. Solo di "hoy estoy triste" a alguien de confianza.', 'Estar con otra persona, aunque sea en silencio, ayuda.'] },
+    ],
+  },
+  {
+    id: 'rabia', emoji: '😡', title: 'Rabia',
+    tagline: 'Estoy muy enojado/a',
+    what: 'La rabia es una emoción fuerte que te avisa que algo no está bien: que te trataron injustamente, que cruzaron un límite tuyo, o que algo te importa mucho. Sentir rabia está bien. Lo importante es lo que haces con ella.',
+    tools: [
+      { title: 'Primero el cuerpo', steps: ['La rabia necesita salida física: camina rápido, aprieta fuerte un cojín, sacúdete.', 'NO la saques sobre personas o cosas.', 'Espera a que el cuerpo se calme antes de hablar o decidir.'] },
+      { title: 'La temperatura del agua', steps: ['Pon las manos bajo agua fría por 30 segundos.', 'El frío activa la respuesta de calma del sistema nervioso.'] },
+      { title: 'Pon en palabras', steps: ['Cuando estés más calmado/a, di o escribe qué fue exactamente lo que te enojó.', 'Diferencia: ¿qué pasó? (hecho) vs. ¿cómo lo interpreté? (pensamiento).', 'Decide si hay algo que quieras decir o hacer al respecto.'] },
+    ],
+  },
+  {
+    id: 'salud', emoji: '🤒', title: 'Miedo a estar enfermo/a',
+    tagline: 'Creo que algo grave me pasa',
+    what: 'A veces el cuerpo siente cosas raras y el cerebro las convierte en "algo grave". Eso se llama hipocondría y es muy común en los niños. Casi siempre lo que sientes tiene una explicación simple y no es peligroso, pero es importante hablarlo con un adulto.',
+    tools: [
+      { title: 'Habla con un adulto primero', steps: ['Antes de buscar en internet o de asustarte más, cuéntale a un adulto de confianza lo que sientes.', 'Describe el síntoma concreto: dónde, cuándo empieza, cuánto dura.', 'Deja que un adulto o médico evalúe. Tu trabajo no es diagnosticarte.'] },
+      { title: 'El ciclo del miedo a la enfermedad', steps: ['Revisa: ¿estás buscando síntomas en internet? Eso empeora el miedo, no lo calma.', 'Cada vez que buscas, tu cerebro encuentra algo nuevo que temer.', 'Decide no buscar y en cambio escribe tus síntomas para contárselos a un adulto.'] },
+      { title: 'Chequeo de realidad', steps: ['Pregúntate: ¿cuándo empezó esto a preocuparme?', '¿Estaba estresado/a o asustado/a por algo más en ese momento?', 'El estrés y la ansiedad causan síntomas físicos reales. No es imaginación, pero tampoco es enfermedad grave.'] },
+    ],
+  },
+  {
+    id: 'soledad', emoji: '🫂', title: 'Soledad',
+    tagline: 'Siento que nadie me entiende',
+    what: 'Sentirse solo/a no siempre significa estar sin personas alrededor. Puedes estar rodeado/a de gente y igual sentirte solo/a si sientes que nadie te entiende de verdad. Es una de las cosas más difíciles de sentir, y le pasa a mucha más gente de lo que parece.',
+    tools: [
+      { title: 'Da el primer paso pequeño', steps: ['Esperar a que alguien venga es muy difícil. Toma tú la iniciativa con algo pequeño.', 'Un mensaje, un "¿cómo estás?" o sentarte cerca de alguien ya es un paso.'] },
+      { title: 'Conéctate contigo', steps: ['Haz algo que disfrutes solo/a: dibujar, escuchar música, leer.', 'Estar a gusto contigo mismo/a hace que la soledad duela menos.'] },
+      { title: 'Habla con un adulto', steps: ['Si llevas mucho tiempo sintiéndote así, cuéntaselo a alguien de confianza.', 'La soledad prolongada necesita apoyo, no solo estrategias.'] },
+    ],
+  },
+  {
+    id: 'verguenza', emoji: '😳', title: 'Vergüenza',
+    tagline: 'Quisiera que la tierra me tragara',
+    what: 'La vergüenza es esa sensación de querer desaparecer cuando crees que hiciste algo ridículo o que los demás te están juzgando. Casi siempre, los demás no le dan tanta importancia como tú crees.',
+    tools: [
+      { title: 'El foco imaginario', steps: ['La vergüenza hace que sientas que todos te están mirando.', 'Recuerda: cada persona está principalmente ocupada pensando en sí misma.', 'Dite: "Esto me importa más a mí que a cualquier otra persona aquí."'] },
+      { title: 'Ríete de ti mismo/a', steps: ['Si puedes encontrar algo gracioso en lo que pasó, úsalo.', 'Reírte primero quita el poder a la situación.', 'No es minimizar lo que sientes, es no darle más poder del que merece.'] },
+      { title: 'Actúa igual que antes', steps: ['La tentación es esconderte o evitar el lugar.', 'Vuelve a hacer lo mismo lo antes posible, con calma.', 'Cada vez que lo evitas, la vergüenza crece. Cada vez que actúas normal, decrece.'] },
+    ],
+  },
+  {
+    id: 'abrumamiento', emoji: '🌊', title: 'Abrumamiento',
+    tagline: 'Tengo demasiadas cosas encima',
+    what: 'El abrumamiento aparece cuando sientes que tienes más cosas de las que puedes manejar. El cerebro entra en modo de bloqueo y a veces se paraliza en vez de actuar. No es flojera, es sobrecarga.',
+    tools: [
+      { title: 'Volcado de cerebro', steps: ['Escribe TODO lo que tienes en la cabeza, sin orden.', 'Solo sacarlo del cerebro al papel ya alivia.', 'Luego elige UNA sola cosa para hacer ahora.'] },
+      { title: 'La regla de los 2 minutos', steps: ['Mira tu lista y busca algo que tome menos de 2 minutos.', 'Hazlo ahora mismo.', 'El cerebro necesita una pequeña victoria para arrancar.'] },
+      { title: 'Divide en trozos', steps: ['Toma la tarea más grande y divídela en 3 pasos concretos.', 'Haz solo el primero.', 'El resto lo haces después. Un trozo a la vez.'] },
+    ],
+  },
+];

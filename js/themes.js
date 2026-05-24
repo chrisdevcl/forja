@@ -31,6 +31,7 @@ const THEMES = [
 
 // ── Animal emoji map ──────────────────────────────────────
 const ANIMAL_MAP = {
+  // Habilidades
   paciencia:           '🐢',
   autocontrol:         '🦉',
   resiliencia:         '🦅',
@@ -56,11 +57,32 @@ const ANIMAL_MAP = {
   aceptacion:          '🦎',
   humildad:            '🐑',
   organizacion:        '🦫',
+  // Nocivos
+  envidia:             '🐍',  // serpiente — envidia silenciosa y venenosa
+  egoismo:             '🦔',  // erizo — cerrado en sí mismo
+  agresividad:         '🦂',  // escorpión — ataca cuando se siente amenazado
+  mentira:             '🦎',  // camaleón — cambia según conveniencia
+  exclusion:           '🦭',  // foca — forma grupos cerrados
+  rencor:              '🦀',  // cangrejo — se aferra y no suelta
+  compararse:          '🦚',  // pavo real — siempre mirando a los demás
+  impulsividad:        '🐂',  // toro — arremete sin pensar
+  // Emociones
+  preocupacion:        '🐦',  // pajarito que no para de trinar
+  ansiedad:            '🐇',  // conejo siempre en alerta
+  frustracion:         '🦏',  // rinoceronte que embiste
+  miedo:               '🦌',  // ciervo paralizado
+  tristeza:            '🐋',  // ballena — llanto profundo
+  rabia:               '🦬',  // bisonte que arremete
+  salud:               '🦥',  // perezoso — se siente sin energía
+  soledad:             '🐟',  // pez solo en el agua
+  verguenza:           '🦩',  // flamenco que esconde la cara
+  abrumamiento:        '🐙',  // pulpo — demasiados brazos a la vez
 };
 
 // ── Pokemon IDs ───────────────────────────────────────────
 // Artwork oficial: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png
 const POKEMON_MAP = {
+  // Habilidades
   paciencia:           79,   // Slowpoke
   autocontrol:         63,   // Abra
   resiliencia:         4,    // Charmander
@@ -86,15 +108,70 @@ const POKEMON_MAP = {
   aceptacion:          196,  // Espeon
   humildad:            143,  // Snorlax
   organizacion:        137,  // Porygon
+  // Nocivos
+  envidia:             200,  // Misdreavus
+  egoismo:             303,  // Mawile
+  agresividad:         56,   // Mankey
+  mentira:             353,  // Shuppet
+  exclusion:           302,  // Sableye
+  rencor:              246,  // Larvitar
+  compararse:          132,  // Ditto
+  impulsividad:        322,  // Numel
+  // Emociones
+  preocupacion:        177,  // Natu — siempre mirando alrededor, inquieto
+  ansiedad:            425,  // Drifloon — flota sin control, incierto
+  frustracion:         54,   // Psyduck — dolor de cabeza constante
+  miedo:               92,   // Gastly — espíritu del miedo
+  tristeza:            287,  // Slakoth — sin energía, cabizbajo
+  rabia:               58,   // Growlithe — perro enfadado
+  salud:               174,  // Igglybuff — frágil, se preocupa por todo
+  soledad:             238,  // Smoochum — busca afecto constantemente
+  verguenza:           60,   // Poliwag — espiral giratoria como mareo/rubor
+  abrumamiento:        213,  // Shuckle — se esconde dentro de su caparazón
 };
 
 // ── Tier system ───────────────────────────────────────────
 const TIERS = [
-  { min: 0,  label: null,     border: null,      cardBg: null,      heroBg: null      },
-  { min: 1,  label: 'Bronce', border: '#CD7F32', cardBg: '#FEF9F0', heroBg: '#FEF3E2' },
-  { min: 3,  label: 'Plata',  border: '#94A3B8', cardBg: '#F8FAFC', heroBg: '#F1F5F9' },
-  { min: 6,  label: 'Oro',    border: '#F59E0B', cardBg: '#FFFBEB', heroBg: '#FEF9C3' },
-  { min: 10, label: 'Élite',  border: '#7C3AED', cardBg: '#FAF5FF', heroBg: '#EDE9FE' },
+  {
+    min: 0, label: null,
+    cardBg: '#ffffff',    border: '#DDDDE8',
+    heroBg: '#ffffff',
+    titleColor: '#1A1A2E', tagColor: null,
+    stripeColor: null,    pillBg: null, pillText: null,
+    glowColor: null,
+  },
+  {
+    min: 1, label: 'Bronce',
+    cardBg: '#FEF0DC',    border: '#B45309',
+    heroBg: '#FEF0DC',
+    titleColor: '#6B2D06', tagColor: '#92400E',
+    stripeColor: '#B45309', pillBg: '#B45309', pillText: '#ffffff',
+    glowColor: '#B45309',
+  },
+  {
+    min: 3, label: 'Plata',
+    cardBg: '#E8EDF5',    border: '#475569',
+    heroBg: '#E8EDF5',
+    titleColor: '#0F172A', tagColor: '#334155',
+    stripeColor: '#475569', pillBg: '#334155', pillText: '#E2E8F0',
+    glowColor: '#475569',
+  },
+  {
+    min: 6, label: 'Oro',
+    cardBg: '#FEF3C7',    border: '#92400E',
+    heroBg: '#FEF3C7',
+    titleColor: '#6B2D06', tagColor: '#92400E',
+    stripeColor: '#D97706', pillBg: '#D97706', pillText: '#ffffff',
+    glowColor: '#F59E0B',
+  },
+  {
+    min: 10, label: 'Élite',
+    cardBg: '#2D1B69',    border: '#A78BFA',
+    heroBg: '#2D1B69',
+    titleColor: '#EDE9FE', tagColor: '#C4B5FD',
+    stripeColor: '#7C3AED', pillBg: '#A78BFA', pillText: '#1E1040',
+    glowColor: '#A78BFA',
+  },
 ];
 
 function getTier(conceptId) {
@@ -110,7 +187,7 @@ function getTier(conceptId) {
 function getTierBadgeHtml(conceptId) {
   const tier = getTier(conceptId);
   if (!tier.label) return '';
-  return `<span class="tier-badge tier-badge--detail" style="border:2px solid ${tier.border};color:${tier.border}">${tier.label} · ${tier.count}×</span>`;
+  return `<span class="tier-badge tier-badge--detail" style="background:${tier.pillBg};color:${tier.pillText}">${tier.label} · ${tier.count}×</span>`;
 }
 // 0 = sin prácticas, 1 = 1-2, 2 = 3-5, 3 = 6+
 function getGlowLevel(conceptId) {
@@ -166,7 +243,7 @@ function getThemeTriggerIcon() {
 function getConceptDisplay(concept, size) {
   const px    = size === 'detail' ? '96' : '56';
   const level = getGlowLevel(concept.id);
-  const color = concept.color;
+  const color = concept.color || '#6366F1';
   const filt  = glowFilter(level, color);
 
   if (window._activeTheme === 'pokemon') {
