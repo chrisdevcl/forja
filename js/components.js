@@ -271,3 +271,87 @@ function makeThemePicker(onSelect) {
   wrap.appendChild(dropdown);
   return wrap;
 }
+
+// ── Data modal (export / import) ───────────────────────────
+function showDataModal(onDone) {
+  // Backdrop
+  const backdrop = el('div', 'modal-backdrop');
+
+  const modal = el('div', 'modal');
+  modal.innerHTML =
+    '<h2 class="modal-title">Mis datos</h2>' +
+    '<p class="modal-desc">Usa este código para traspasar tu progreso a otro dispositivo o a la app instalada.</p>';
+
+  // ── Export ──────────────────────────
+  const exportSection = el('div', 'modal-section');
+  exportSection.innerHTML = '<p class="modal-label">Tu código de progreso</p>';
+
+  const code = Storage.exportData();
+  const textarea = el('textarea', 'modal-code');
+  textarea.value = code;
+  textarea.readOnly = true;
+  textarea.rows = 3;
+
+  const copyBtn = el('button', 'modal-btn modal-btn--primary', 'Copiar código');
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard?.writeText(code).then(() => {
+      copyBtn.textContent = '✓ Copiado';
+      setTimeout(() => { copyBtn.textContent = 'Copiar código'; }, 2000);
+    }).catch(() => {
+      textarea.select();
+      document.execCommand('copy');
+      copyBtn.textContent = '✓ Copiado';
+      setTimeout(() => { copyBtn.textContent = 'Copiar código'; }, 2000);
+    });
+  });
+
+  exportSection.appendChild(textarea);
+  exportSection.appendChild(copyBtn);
+  modal.appendChild(exportSection);
+
+  // ── Divider ──────────────────────────
+  modal.appendChild(el('div', 'modal-divider'));
+
+  // ── Import ──────────────────────────
+  const importSection = el('div', 'modal-section');
+  importSection.innerHTML = '<p class="modal-label">Importar desde otro dispositivo</p>';
+
+  const importInput = el('textarea', 'modal-code');
+  importInput.placeholder = 'Pega aquí el código de tu otro dispositivo...';
+  importInput.rows = 3;
+
+  const importMsg = el('p', 'modal-msg');
+
+  const importBtn = el('button', 'modal-btn modal-btn--secondary', 'Importar datos');
+  importBtn.addEventListener('click', () => {
+    const val = importInput.value.trim();
+    if (!val) {
+      importMsg.textContent = 'Pega un código primero.';
+      importMsg.className = 'modal-msg modal-msg--error';
+      return;
+    }
+    const ok = Storage.importData(val);
+    if (ok) {
+      importMsg.textContent = '✓ Datos importados. Recargando...';
+      importMsg.className = 'modal-msg modal-msg--ok';
+      setTimeout(() => { backdrop.remove(); onDone(); }, 1200);
+    } else {
+      importMsg.textContent = 'Código inválido. Verifica que lo copiaste completo.';
+      importMsg.className = 'modal-msg modal-msg--error';
+    }
+  });
+
+  importSection.appendChild(importInput);
+  importSection.appendChild(importMsg);
+  importSection.appendChild(importBtn);
+  modal.appendChild(importSection);
+
+  // ── Close ────────────────────────────
+  const closeBtn = el('button', 'modal-btn modal-btn--ghost', 'Cerrar');
+  closeBtn.addEventListener('click', () => backdrop.remove());
+  modal.appendChild(closeBtn);
+
+  backdrop.appendChild(modal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.remove(); });
+  document.body.appendChild(backdrop);
+}

@@ -29,5 +29,30 @@ const Storage = (() => {
     return localStorage.getItem(THEME_KEY) || 'animals';
   }
 
-  return { getHistory, saveSession, getCount, saveTheme, loadTheme };
+  function exportData() {
+    const payload = { history: getHistory(), theme: localStorage.getItem(THEME_KEY) || 'animals' };
+    const bytes   = new TextEncoder().encode(JSON.stringify(payload));
+    const binary  = Array.from(bytes, b => String.fromCodePoint(b)).join('');
+    return btoa(binary);
+  }
+
+  function importData(code) {
+    try {
+      const binary  = atob(code.trim());
+      const bytes   = Uint8Array.from(binary, c => c.codePointAt(0));
+      const payload = JSON.parse(new TextDecoder().decode(bytes));
+      if (!payload.history) return false;
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(payload.history));
+      if (payload.theme) localStorage.setItem(THEME_KEY, payload.theme);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  return {
+    getHistory, saveSession, getCount,
+    saveTheme, loadTheme,
+    exportData, importData,
+  };
 })();

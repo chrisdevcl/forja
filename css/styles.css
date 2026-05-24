@@ -485,3 +485,86 @@ body {
   color: #4A4A5A;
   font-weight: 500;
 }
+
+/* ── HEADER RIGHT ── */
+.header-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+
+.header-icon-btn {
+  width:42px; height:42px;
+  border-radius:12px;
+  border:2px solid #E5E4E0;
+  background:white;
+  color:#9C9CAA;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  transition:transform 0.13s, color 0.13s;
+  -webkit-tap-highlight-color:transparent;
+}
+.header-icon-btn:hover  { color:#1A1A2E; }
+.header-icon-btn:active { transform:scale(0.92); }
+
+/* ── DATA MODAL ── */
+.modal-backdrop {
+  position:fixed; inset:0; z-index:300;
+  background:rgba(0,0,0,0.45);
+  display:flex; align-items:flex-end; justify-content:center;
+  padding:0;
+  animation:fadeIn 0.18s ease;
+}
+
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.modal {
+  background:white;
+  width:100%; max-width:480px;
+  border-radius:24px 24px 0 0;
+  padding:24px 20px 36px;
+  display:flex; flex-direction:column; gap:16px;
+  animation:slideUp 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  max-height:90vh; overflow-y:auto;
+}
+
+.modal-title {
+  font-family:'Baloo 2',sans-serif;
+  font-size:1.2rem; font-weight:800; color:#1A1A2E;
+}
+
+.modal-desc {
+  font-size:0.82rem; color:#9C9CAA; font-weight:600; line-height:1.5; margin-top:-8px;
+}
+
+.modal-section { display:flex; flex-direction:column; gap:8px; }
+
+.modal-label {
+  font-family:'Baloo 2',sans-serif;
+  font-size:0.82rem; font-weight:800; color:#1A1A2E;
+}
+
+.modal-code {
+  width:100%; padding:10px 12px;
+  border:1.5px solid #E5E4E0; border-radius:12px;
+  font-family:'Nunito',sans-serif; font-size:0.78rem;
+  color:#4A4A5A; background:#FAFAFA;
+  outline:none; resize:none; line-height:1.5;
+}
+.modal-code:focus { border-color:#1A1A2E; }
+
+.modal-btn {
+  width:100%; padding:13px;
+  border:none; border-radius:14px;
+  font-family:'Baloo 2',sans-serif; font-size:0.95rem; font-weight:800;
+  cursor:pointer; transition:transform 0.13s, opacity 0.13s;
+  -webkit-tap-highlight-color:transparent;
+}
+.modal-btn:active { transform:scale(0.97); opacity:0.88; }
+
+.modal-btn--primary  { background:#1A1A2E; color:white; }
+.modal-btn--secondary { background:#F7F6F2; color:#1A1A2E; border:2px solid #E5E4E0; }
+.modal-btn--ghost    { background:transparent; color:#9C9CAA; font-size:0.85rem; }
+
+.modal-divider { height:1px; background:#F2F1EE; }
+
+.modal-msg { font-size:0.78rem; font-weight:700; min-height:16px; }
+.modal-msg--ok    { color:#16A34A; }
+.modal-msg--error { color:#DC2626; }

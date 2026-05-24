@@ -50,7 +50,21 @@ function renderHome() {
       '<p class="home-tagline">quien quieres ser</p>' +
     '</div>';
   header.appendChild(left);
-  header.appendChild(makeThemePicker(onThemeChange));
+
+  const headerRight = el('div', 'header-right');
+
+  const dataBtn = el('button', 'header-icon-btn');
+  dataBtn.setAttribute('aria-label', 'Exportar o importar datos');
+  dataBtn.title = 'Mis datos';
+  dataBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>`;
+  dataBtn.addEventListener('click', () => showDataModal(() => {
+    window._activeTheme = Storage.loadTheme();
+    renderHome();
+  }));
+
+  headerRight.appendChild(dataBtn);
+  headerRight.appendChild(makeThemePicker(onThemeChange));
+  header.appendChild(headerRight);
   home.appendChild(header);
 
   // ── Progress ────────────────────────────────────────────
