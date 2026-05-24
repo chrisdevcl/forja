@@ -49,22 +49,22 @@ Los scripts se cargan en orden de dependencias:
 storage.js → data.js → themes.js → components.js → app.js
 ```
 
-| Archivo | Responsabilidad |
-|---|---|
-| `storage.js` | IIFE con acceso a localStorage. Expone `Storage.*` |
-| `data.js` | Arrays de datos puros. No tiene lógica. |
-| `themes.js` | Todo lo visual por tema: URLs, mapas, tiers, glow, `getConceptDisplay()` |
-| `components.js` | Funciones que construyen nodos DOM reutilizables |
-| `app.js` | Estado global (`window._activeTheme`, etc.), renderizado y navegación |
+| Archivo         | Responsabilidad                                                          |
+|-----------------|--------------------------------------------------------------------------|
+| `storage.js`    | IIFE con acceso a localStorage. Expone `Storage.*`                       |
+| `data.js`       | Arrays de datos puros. No tiene lógica.                                  |
+| `themes.js`     | Todo lo visual por tema: URLs, mapas, tiers, glow, `getConceptDisplay()` |
+| `components.js` | Funciones que construyen nodos DOM reutilizables                         |
+| `app.js`        | Estado global (`window._activeTheme`, etc.), renderizado y navegación    |
 
 ---
 
 ## Temas visuales
 
-| ID | Descripción | Fuente |
-|---|---|---|
-| `animals` | Emojis de animales representativos | Emojis del sistema (fallback universal) |
-| `pokemon` | Artwork oficial de Pokémon | PokeAPI GitHub CDN (sin fetch, URL estática) |
+| ID        | Descripción                        | Fuente                                       |
+|-----------|------------------------------------|----------------------------------------------|
+| `animals` | Emojis de animales representativos | Emojis del sistema (fallback universal)      |
+| `pokemon` | Artwork oficial de Pokémon         | PokeAPI GitHub CDN (sin fetch, URL estática) |
 
 ---
 
@@ -72,13 +72,13 @@ storage.js → data.js → themes.js → components.js → app.js
 
 Cada concepto acumula prácticas y escala de nivel visualmente:
 
-| Prácticas | Tier | Color tarjeta |
-|---|---|---|
-| 0 | — | Blanco |
-| 1–2 | Bronce | Tierra cálida |
-| 3–5 | Plata | Azul frío |
-| 6–9 | Oro | Amarillo vivo |
-| 10+ | Élite | Violeta oscuro |
+| Prácticas | Tier   | Color tarjeta  |
+|-----------|--------|----------------|
+| 0         | —      | Blanco         |
+| 1–2       | Bronce | Tierra cálida  |
+| 3–5       | Plata  | Azul frío      |
+| 6–9       | Oro    | Amarillo vivo  |
+| 10+       | Élite  | Violeta oscuro |
 
 El tier afecta la tarjeta en el grid **y** el interior del detalle (mismo fondo, título y stripe).
 
@@ -86,11 +86,11 @@ El tier afecta la tarjeta en el grid **y** el interior del detalle (mismo fondo,
 
 ## Secciones de contenido
 
-| Pestaña | Contenido |
-|---|---|
-| Quién quiero ser | 25 habilidades positivas con ejercicios registrables |
-| Qué quiero evitar | 8 actitudes nocivas con ejercicios de reconocimiento |
-| Cuando me siento... | 10 emociones con herramientas de uso inmediato |
+| Pestaña             | Contenido                                            |
+|---------------------|------------------------------------------------------|
+| Quién quiero ser    | 25 habilidades positivas con ejercicios registrables |
+| Qué quiero evitar   | 8 actitudes nocivas con ejercicios de reconocimiento |
+| Cuando me siento... | 10 emociones con herramientas de uso inmediato       |
 
 ---
 
