@@ -126,6 +126,8 @@ function makeExercise(concept) {
 
     Storage.saveSession(concept.id, fullInputs);
     showToast(`¡Práctica de ${concept.title} registrada!`);
+    celebrate(concept.color);
+    checkAchievements();
 
     // 1. Actualizar todos los colores del tier en el detalle
     const newTier = getTier(concept.id);
@@ -172,8 +174,15 @@ function makeExercise(concept) {
     // 3. Actualizar historial
     const existing = document.getElementById('concept-history');
     if (existing) {
-      existing.innerHTML = '';
-      existing.appendChild(makeHistoryInline(concept.id, concept.color));
+      const sectionBody = existing.querySelector('.section-body');
+      sectionBody.innerHTML = '';
+      sectionBody.appendChild(makeHistoryInline(concept.id, concept.color));
+    } else {
+      const historyContent = document.createElement('div');
+      historyContent.appendChild(makeHistoryInline(concept.id, concept.color));
+      const historySection = makeSection(null, 'Mis prácticas', historyContent, true);
+      historySection.id = 'concept-history';
+      document.getElementById('detail-body')?.appendChild(historySection);
     }
   });
 

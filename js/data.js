@@ -646,3 +646,29 @@ const EMOCIONES = [
     ],
   },
 ];
+
+// ── Logros globales ────────────────────────────────────────
+const ACHIEVEMENTS = [
+  { id: 'primera',    label: 'Primera chispa',     desc: 'Completaste tu primera práctica',        icon: '🔥', condition: s => s.total >= 1   },
+  { id: 'cinco',      label: 'En marcha',           desc: '5 prácticas completadas en total',        icon: '⚡', condition: s => s.total >= 5   },
+  { id: 'diez',       label: 'Forjador/a',          desc: '10 prácticas completadas en total',       icon: '🔨', condition: s => s.total >= 10  },
+  { id: 'veinticinco',label: 'Curtido/a',           desc: '25 prácticas completadas en total',       icon: '🏅', condition: s => s.total >= 25  },
+  { id: 'cincuenta',  label: 'Maestro/a',           desc: '50 prácticas completadas en total',       icon: '🏆', condition: s => s.total >= 50  },
+  { id: 'racha3',     label: '3 días seguidos',     desc: 'Practicaste 3 días consecutivos',         icon: '📅', condition: s => s.streak >= 3  },
+  { id: 'racha7',     label: 'Semana completa',     desc: 'Practicaste 7 días consecutivos',         icon: '🗓️', condition: s => s.streak >= 7  },
+  { id: 'variedad5',  label: 'Explorador/a',        desc: 'Practicaste 5 conceptos diferentes',      icon: '🧭', condition: s => s.explored >= 5  },
+  { id: 'variedad10', label: 'Curioso/a imparable', desc: 'Practicaste 10 conceptos diferentes',     icon: '🌍', condition: s => s.explored >= 10 },
+  { id: 'variedad25', label: 'Completo/a',          desc: 'Practicaste todos los conceptos',         icon: '🌟', condition: s => s.explored >= 25 },
+  { id: 'nocivo1',    label: 'Me reconozco',        desc: 'Practicaste un ejercicio de qué evitar',  icon: '🪞', condition: s => s.nocivos >= 1  },
+  { id: 'emocion1',   label: 'Me entiendo',         desc: 'Usaste una herramienta de emociones',     icon: '💙', condition: s => s.emociones >= 1 },
+];
+
+// ── Reto de la semana ──────────────────────────────────────
+// Rota cada lunes basado en el número de semana del año.
+// Usa solo conceptos positivos (CONCEPTS).
+function getWeeklyChallenge() {
+  const now      = new Date();
+  const startOf  = new Date(now.getFullYear(), 0, 1);
+  const weekNum  = Math.floor((now - startOf) / (7 * 24 * 3600 * 1000));
+  return CONCEPTS[weekNum % CONCEPTS.length];
+}

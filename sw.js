@@ -1,4 +1,4 @@
-const CACHE = 'forja-v1';
+const CACHE = 'forja-v2';
 
 const PRECACHE = [
   './',
