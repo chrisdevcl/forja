@@ -663,12 +663,11 @@ const ACHIEVEMENTS = [
   { id: 'emocion1',   label: 'Me entiendo',         desc: 'Usaste una herramienta de emociones',     icon: '💙', condition: s => s.emociones >= 1 },
 ];
 
-// ── Reto de la semana ──────────────────────────────────────
-// Rota cada lunes basado en el número de semana del año.
-// Usa solo conceptos positivos (CONCEPTS).
-function getWeeklyChallenge() {
-  const now      = new Date();
-  const startOf  = new Date(now.getFullYear(), 0, 1);
-  const weekNum  = Math.floor((now - startOf) / (7 * 24 * 3600 * 1000));
-  return CONCEPTS[weekNum % CONCEPTS.length];
+// ── Reto diario ────────────────────────────────────────────
+// Rota cada día basado en el día del año. Usa solo CONCEPTS.
+function getDailyChallenge() {
+  const now     = new Date();
+  const startOf = new Date(now.getFullYear(), 0, 1);
+  const dayNum  = Math.floor((now - startOf) / (24 * 3600 * 1000));
+  return CONCEPTS[dayNum % CONCEPTS.length];
 }

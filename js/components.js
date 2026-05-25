@@ -10,7 +10,7 @@ function el(tag, cls, html) {
 let _toastTimer;
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
+  t.innerHTML = msg;
   t.classList.add('show');
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
@@ -125,7 +125,7 @@ function makeExercise(concept) {
     });
 
     Storage.saveSession(concept.id, fullInputs);
-    showToast(`¡Práctica de ${concept.title} registrada!`);
+    showToast(`<span class="toast-meta">✦ Práctica registrada</span><strong class="toast-concept-name">${concept.title}</strong>`);
     celebrate(concept.color);
     checkAchievements();
 

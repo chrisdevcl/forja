@@ -143,15 +143,16 @@ function renderHome() {
     home.appendChild(summary);
   }
 
-  // Reto de la semana
-  const reto = getWeeklyChallenge();
-  if (reto) {
+  // Reto diario — solo aparece si el concepto propuesto no fue practicado hoy
+  const reto = getDailyChallenge();
+  const todayLocale = new Date().toLocaleDateString('es-CL');
+  if (reto && !(Storage.getHistory()[reto.id] || []).some(s => s.date === todayLocale)) {
     const retoEl = el('div', 'reto-wrap');
     const display = getConceptDisplay(reto, 'card');
     retoEl.innerHTML =
       `<div class="reto-card">` +
         `<div class="reto-card-top">` +
-          `<span class="reto-label">Reto de esta semana</span>` +
+          `<span class="reto-label">Reto de hoy</span>` +
         `</div>` +
         `<div class="reto-card-body">` +
           `<div class="reto-display">${display}</div>` +
