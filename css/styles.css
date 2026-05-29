@@ -1,3 +1,21 @@
+/* ── Splash ── */
+#splash {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #F7F6F2;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 28px;
+  transition: opacity 0.3s ease;
+}
+#splash.splash--hidden { opacity: 0; pointer-events: none; }
+
+.splash-spinner {
+  width: 28px; height: 28px;
+  border: 3px solid #E5E4E0;
+  border-top-color: #F97316;
+  border-radius: 50%;
+  animation: ptr-spin 0.7s linear infinite;
+}
+
 /* ── Pull to refresh ── */
 .ptr-indicator {
   position: fixed; top: -48px; left: 50%; transform: translateX(-50%);
@@ -737,6 +755,9 @@ body {
   transition: transform 0.13s;
 }
 .summary-btn:active { transform: scale(0.95); }
+
+.history-btn-wrap { padding: 0 clamp(12px,3vw,32px) 4px; }
+.summary-btn--standalone { padding: 10px 18px; font-size: 0.85rem; }
 
 /* ── RETO ── */
 .reto-wrap { padding: 0 clamp(12px,3vw,32px) 12px; }

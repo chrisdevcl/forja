@@ -109,6 +109,13 @@ function renderHome() {
   glosarioBtn.addEventListener('click', showGlossaryModal);
   headerRight.appendChild(glosarioBtn);
 
+  // Historial button
+  const historialBtn = el('button', 'header-icon-btn');
+  historialBtn.title = 'Historial';
+  historialBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
+  historialBtn.addEventListener('click', goGlobalHistory);
+  headerRight.appendChild(historialBtn);
+
   // Logros button
   const logrosBtn = el('button', 'header-icon-btn');
   logrosBtn.title = 'Logros';
@@ -130,7 +137,7 @@ function renderHome() {
   header.appendChild(headerRight);
   home.appendChild(header);
 
-  // Summary card
+  // Tarjeta de racha — solo si hay racha activa
   if (streak.current > 0) {
     const summary = el('div', 'summary-card');
     summary.innerHTML =
@@ -148,6 +155,7 @@ function renderHome() {
     summary.querySelector('.summary-btn').addEventListener('click', goGlobalHistory);
     home.appendChild(summary);
   }
+
 
   // Reto diario — solo aparece si el concepto propuesto no fue practicado hoy
   const reto = getDailyChallenge();
@@ -471,6 +479,13 @@ document.addEventListener('error', (e) => {
 Storage.checkStreak();
 renderHome();
 preloadAllImages();
+
+// Ocultar splash una vez que la app está lista
+const _splash = document.getElementById('splash');
+if (_splash) {
+  _splash.classList.add('splash--hidden');
+  _splash.addEventListener('transitionend', () => _splash.remove(), { once: true });
+}
 
 // ── Pull to refresh ────────────────────────────────────────
 (function () {
