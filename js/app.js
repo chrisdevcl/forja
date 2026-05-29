@@ -131,8 +131,7 @@ function renderHome() {
   home.appendChild(header);
 
   // Summary card
-    Storage.getTotalPractices();
-    if (streak.current > 0) {
+  if (streak.current > 0) {
     const summary = el('div', 'summary-card');
     summary.innerHTML =
       `<div class="summary-card-top">` +
@@ -254,24 +253,15 @@ function renderDetail(id) {
   const titleC  = tier.titleColor;
   const tagC    = tier.tagColor || c.color;
 
-  view.innerHTML =
-    `<nav class="detail-nav" style="background:${heroBg}">` +
-      `<button class="back-btn" id="back-btn">← Volver</button>` +
-      `<div class="detail-nav-right" id="detail-nav-right"></div>` +
-    `</nav>` +
-    `<div class="detail-hero${isNocivo ? ' detail-hero--nocivo' : ''}" style="background:${heroBg}">` +
-      `<span class="detail-stripe" style="background:${stripe}"></span>` +
-      `<div class="detail-glow"></div>` +
-      `<div class="detail-display-wrap">${display}</div>` +
-      `<h1 class="detail-title" style="color:${titleC}">${c.title}</h1>` +
-      `<p class="detail-tagline" style="color:${tagC}">${c.tagline}</p>` +
-      `<div id="detail-tier" class="detail-tier">${getTierBadgeHtml(c.id)}</div>` +
-    `</div>` +
-    `<div class="detail-body" id="detail-body"></div>`;
+  const heroInner =
+    `<span class="detail-stripe" style="background:${stripe}"></span>` +
+    `<div class="detail-glow"></div>` +
+    `<div class="detail-display-wrap">${display}</div>` +
+    `<h1 class="detail-title" style="color:${titleC}">${c.title}</h1>` +
+    `<p class="detail-tagline" style="color:${tagC}">${c.tagline}</p>` +
+    `<div id="detail-tier" class="detail-tier">${getTierBadgeHtml(c.id)}</div>`;
 
-  document.getElementById('back-btn').addEventListener('click', goHome);
-
-  const body  = document.getElementById('detail-body');
+  const body = buildDetailShell(view, heroBg, heroInner, isNocivo ? ' detail-hero--nocivo' : '');
   const why   = isNocivo ? '¿Por qué nos frena?'    : '¿Por qué importa?';
   const where = isNocivo ? '¿Cuándo aparece?'         : 'Dónde la usas en tu vida';
 
@@ -297,23 +287,12 @@ function renderEmotionDetail(id) {
 
   const display = getConceptDisplay(e, 'detail');
 
-  view.innerHTML =
-    `<nav class="detail-nav" style="background:#F5F3FF">` +
-      `<button class="back-btn" id="back-btn">← Volver</button>` +
-      `<div class="detail-nav-right" id="detail-nav-right"></div>` +
-    `</nav>` +
-    `<div class="detail-hero" style="background:#F5F3FF">` +
-      `<span class="detail-stripe" style="background:${COLOR}"></span>` +
-      `<div class="detail-glow"></div>` +
-      `<div class="detail-display-wrap">${display}</div>` +
-      `<h1 class="detail-title">${e.title}</h1>` +
-      `<p class="detail-tagline" style="color:${COLOR}">${e.tagline}</p>` +
-    `</div>` +
-    `<div class="detail-body" id="detail-body"></div>`;
-
-  document.getElementById('back-btn').addEventListener('click', goHome);
-
-  const body = document.getElementById('detail-body');
+  const body = buildDetailShell(view, '#F5F3FF',
+    `<span class="detail-stripe" style="background:${COLOR}"></span>` +
+    `<div class="detail-glow"></div>` +
+    `<div class="detail-display-wrap">${display}</div>` +
+    `<h1 class="detail-title">${e.title}</h1>` +
+    `<p class="detail-tagline" style="color:${COLOR}">${e.tagline}</p>`);
   e.tools.forEach((tool, i) => {
     const stepsHtml = tool.steps.map((s, j) =>
       `<div class="emo-step">` +
@@ -354,21 +333,8 @@ function renderGlobalHistory() {
   });
 
   const streak = Storage.getStreak();
-
-  view.innerHTML =
-    `<nav class="detail-nav">` +
-      `<button class="back-btn" id="back-btn">← Volver</button>` +
-    `</nav>` +
-    `<div class="detail-hero" style="background:var(--bg-app);padding-bottom:16px">` +
-      `<span class="detail-stripe" style="background:#6366F1"></span>` +
-      `<h1 class="detail-title" style="padding-top:70px">Historial global</h1>` +
-      `<p class="detail-tagline">${Storage.getTotalPractices()} prácticas en total</p>` +
-    `</div>` +
-    `<div class="detail-body" id="gh-body"></div>`;
-
-  document.getElementById('back-btn').addEventListener('click', goHome);
-
-  const body = document.getElementById('gh-body');
+  const total  = Storage.getTotalPractices();
+  const body   = buildSimpleShell(view, '#6366F1', 'Historial global', `${total} prácticas en total`);
 
   // Stats rápidas
   const statsEl = el('div', 'gh-stats');
@@ -389,7 +355,9 @@ function renderGlobalHistory() {
     const item = el('div', 'gh-item');
     const emoji = window._activeTheme === 'animals'
       ? (ANIMAL_MAP[c.id] || c.emoji)
-      : c.emoji;
+      : window._activeTheme === 'pokemon'
+        ? (ANIMAL_MAP[c.id] || c.emoji)  // fallback emoji en lista, imagen no aplica aquí
+        : c.emoji;
     const inputs = Object.values(s.inputs || {}).filter(v => v?.a || (typeof v === 'string' && v));
     const preview = inputs.length
       ? (inputs[0].a || inputs[0]).slice(0, 60)
@@ -413,21 +381,7 @@ function renderLogros() {
   view.style.background = 'var(--bg-app)';
 
   const unlocked = Storage.getUnlocked();
-
-  view.innerHTML =
-    `<nav class="detail-nav">` +
-      `<button class="back-btn" id="back-btn">← Volver</button>` +
-    `</nav>` +
-    `<div class="detail-hero" style="background:var(--bg-app);padding-bottom:16px">` +
-      `<span class="detail-stripe" style="background:#F59E0B"></span>` +
-      `<h1 class="detail-title" style="padding-top:70px">Logros</h1>` +
-      `<p class="detail-tagline">${unlocked.length} / ${ACHIEVEMENTS.length} desbloqueados</p>` +
-    `</div>` +
-    `<div class="detail-body" id="logros-body"></div>`;
-
-  document.getElementById('back-btn').addEventListener('click', goHome);
-
-  const body = document.getElementById('logros-body');
+  const body     = buildSimpleShell(view, '#F59E0B', 'Logros', `${unlocked.length} / ${ACHIEVEMENTS.length} desbloqueados`);
   const list = el('div', 'logros-list');
 
   ACHIEVEMENTS.forEach(a => {
@@ -472,6 +426,36 @@ function goHome()            { showHomeView(); }
 function goEmotionDetail(id) { showDetailView(() => renderEmotionDetail(id)); }
 function goGlobalHistory()   { showDetailView(renderGlobalHistory); }
 function goLogros()          { showDetailView(renderLogros); }
+
+// ── Shared view builders ───────────────────────────────────
+function buildDetailShell(view, heroBg, heroInner, heroExtra = '') {
+  view.innerHTML =
+    `<nav class="detail-nav" style="background:${heroBg}">` +
+      `<button class="back-btn" id="back-btn">← Volver</button>` +
+      `<div class="detail-nav-right" id="detail-nav-right"></div>` +
+    `</nav>` +
+    `<div class="detail-hero${heroExtra}" style="background:${heroBg}">` +
+      heroInner +
+    `</div>` +
+    `<div class="detail-body" id="detail-body"></div>`;
+  document.getElementById('back-btn').addEventListener('click', goHome);
+  return document.getElementById('detail-body');
+}
+
+function buildSimpleShell(view, stripeColor, title, subtitle) {
+  view.innerHTML =
+    `<nav class="detail-nav">` +
+      `<button class="back-btn" id="back-btn">← Volver</button>` +
+    `</nav>` +
+    `<div class="detail-hero" style="background:var(--bg-app);padding-bottom:16px">` +
+      `<span class="detail-stripe" style="background:${stripeColor}"></span>` +
+      `<h1 class="detail-title" style="padding-top:70px">${title}</h1>` +
+      `<p class="detail-tagline">${subtitle}</p>` +
+    `</div>` +
+    `<div class="detail-body" id="shell-body"></div>`;
+  document.getElementById('back-btn').addEventListener('click', goHome);
+  return document.getElementById('shell-body');
+}
 
 // ── Image error handling ───────────────────────────────────
 document.addEventListener('error', (e) => {
