@@ -281,15 +281,32 @@ function makeThemePicker(onSelect) {
   return wrap;
 }
 
+// ── Modal helpers ──────────────────────────────────────────
+function openModal(backdrop) {
+  document.body.style.overflow = 'hidden';
+  document.body.appendChild(backdrop);
+}
+function closeModal(backdrop) {
+  backdrop.remove();
+  if (!document.querySelector('.modal-backdrop')) {
+    document.body.style.overflow = '';
+  }
+}
+
 // ── Data modal (export / import) ───────────────────────────
 function showDataModal(onDone) {
   // Backdrop
   const backdrop = el('div', 'modal-backdrop');
 
-  const modal = el('div', 'modal');
-  modal.innerHTML =
-    '<h2 class="modal-title">Mis datos</h2>' +
-    '<p class="modal-desc">Usa este código para traspasar tu progreso a otro dispositivo o a la app instalada.</p>';
+  const modal = el('div', 'modal modal--data');
+
+  const dataHeader = el('div', 'glossary-header');
+  const dataCloseBtn = el('button', 'modal-close modal-close--top', '✕');
+  dataCloseBtn.addEventListener('click', () => closeModal(backdrop));
+  dataHeader.innerHTML = '<h2 class="modal-title">Mis datos</h2>';
+  dataHeader.appendChild(dataCloseBtn);
+  modal.appendChild(dataHeader);
+  modal.appendChild(el('p', 'modal-desc', 'Usa este código para traspasar tu progreso a otro dispositivo o a la app instalada.'));
 
   // ── Export ──────────────────────────
   const exportSection = el('div', 'modal-section');
@@ -343,7 +360,7 @@ function showDataModal(onDone) {
     if (ok) {
       importMsg.textContent = '✓ Datos importados. Recargando...';
       importMsg.className = 'modal-msg modal-msg--ok';
-      setTimeout(() => { backdrop.remove(); onDone(); }, 1200);
+      setTimeout(() => { closeModal(backdrop); onDone(); }, 1200);
     } else {
       importMsg.textContent = 'Código inválido. Verifica que lo copiaste completo.';
       importMsg.className = 'modal-msg modal-msg--error';
@@ -355,12 +372,60 @@ function showDataModal(onDone) {
   importSection.appendChild(importBtn);
   modal.appendChild(importSection);
 
-  // ── Close ────────────────────────────
-  const closeBtn = el('button', 'modal-btn modal-btn--ghost', 'Cerrar');
-  closeBtn.addEventListener('click', () => backdrop.remove());
-  modal.appendChild(closeBtn);
+  backdrop.appendChild(modal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(backdrop); });
+  openModal(backdrop);
+}
+
+// ── Glosario modal ─────────────────────────────────────────
+function showGlossaryModal() {
+  const backdrop = el('div', 'modal-backdrop');
+  const modal    = el('div', 'modal modal--glossary');
+
+  const header = el('div', 'glossary-header');
+  const closeBtn = el('button', 'modal-close modal-close--top', '✕');
+  closeBtn.addEventListener('click', () => closeModal(backdrop));
+  header.innerHTML = '<h2 class="modal-title">Palabras difíciles</h2>';
+  header.appendChild(closeBtn);
+  modal.appendChild(header);
+
+  const search = el('input', 'glossary-search');
+  search.type = 'text';
+  search.placeholder = 'Buscar palabra...';
+  modal.appendChild(search);
+
+  const list = el('div', 'glossary-list');
+
+  const allConcepts = [...CONCEPTS, ...NOCIVOS, ...EMOCIONES];
+
+  function renderList(query) {
+    list.innerHTML = '';
+    const q = query.toLowerCase().trim();
+    const filtered = q ? GLOSSARY.filter(i => i.word.toLowerCase().includes(q) || i.def.toLowerCase().includes(q)) : GLOSSARY;
+    if (filtered.length === 0) {
+      list.innerHTML = '<p class="glossary-empty">No encontré esa palabra</p>';
+    } else {
+      filtered.forEach(item => {
+        const concept = allConcepts.find(c => c.id === item.conceptId);
+        const display = concept ? getConceptDisplay(concept, 'card') : '';
+        const row = el('div', 'glossary-item');
+        row.innerHTML =
+          `<div class="glossary-display">${display}</div>` +
+          `<div class="glossary-body">` +
+            `<span class="glossary-word">${item.word}</span>` +
+            `<span class="glossary-def">${item.def}</span>` +
+          `</div>`;
+        list.appendChild(row);
+      });
+    }
+  }
+
+  renderList('');
+  search.addEventListener('input', () => renderList(search.value));
+  modal.appendChild(list);
 
   backdrop.appendChild(modal);
-  backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.remove(); });
-  document.body.appendChild(backdrop);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(backdrop); });
+  openModal(backdrop);
+  search.focus();
 }

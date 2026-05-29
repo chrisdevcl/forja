@@ -102,6 +102,13 @@ function renderHome() {
 
   const headerRight = el('div', 'header-right');
 
+  // Glosario button
+  const glosarioBtn = el('button', 'header-icon-btn');
+  glosarioBtn.title = 'Palabras difíciles';
+  glosarioBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`;
+  glosarioBtn.addEventListener('click', showGlossaryModal);
+  headerRight.appendChild(glosarioBtn);
+
   // Logros button
   const logrosBtn = el('button', 'header-icon-btn');
   logrosBtn.title = 'Logros';
@@ -124,8 +131,8 @@ function renderHome() {
   home.appendChild(header);
 
   // Summary card
-  const total = Storage.getTotalPractices();
-  if (total > 0 || streak.current > 0) {
+    Storage.getTotalPractices();
+    if (streak.current > 0) {
     const summary = el('div', 'summary-card');
     summary.innerHTML =
       `<div class="summary-card-top">` +
@@ -477,5 +484,69 @@ document.addEventListener('error', (e) => {
 }, true);
 
 // ── Init ───────────────────────────────────────────────────
+Storage.checkStreak();
 renderHome();
 preloadAllImages();
+
+// ── Pull to refresh ────────────────────────────────────────
+(function () {
+  const THRESHOLD = 72;
+  let startY = 0, pulling = false, indicator = null;
+
+  function getIndicator() {
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.className = 'ptr-indicator';
+      indicator.innerHTML = '<div class="ptr-spinner"></div>';
+      document.body.prepend(indicator);
+    }
+    return indicator;
+  }
+
+  document.addEventListener('touchstart', e => {
+    if (window.scrollY === 0 && !document.querySelector('.modal-backdrop')) {
+      startY = e.touches[0].clientY;
+      pulling = true;
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchmove', e => {
+    if (!pulling) return;
+    const dist = Math.min(e.touches[0].clientY - startY, THRESHOLD * 1.5);
+    if (dist <= 0) return;
+    const ind = getIndicator();
+    ind.style.transform = `translateY(${Math.min(dist, THRESHOLD)}px)`;
+    ind.classList.toggle('ptr-indicator--ready', dist >= THRESHOLD);
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => {
+    if (!pulling) return;
+    pulling = false;
+    const ind = getIndicator();
+    if (ind.classList.contains('ptr-indicator--ready')) {
+      ind.classList.add('ptr-indicator--loading');
+      ind.style.transform = `translateY(${THRESHOLD}px)`;
+      Storage.checkStreak();
+      renderHome();
+      setTimeout(() => {
+        ind.style.transform = '';
+        ind.classList.remove('ptr-indicator--ready', 'ptr-indicator--loading');
+      }, 600);
+    } else {
+      ind.style.transform = '';
+    }
+  });
+})();
+
+// Refresca home si el día cambió (medianoche o vuelta a la pestaña)
+let _lastDate = new Date().toDateString();
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) return;
+  const now = new Date().toDateString();
+  if (now !== _lastDate) {
+    _lastDate = now;
+    Storage.checkStreak();
+    const home = document.getElementById('view-home');
+    if (home && home.style.display !== 'none') renderHome();
+  }
+});

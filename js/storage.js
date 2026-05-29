@@ -32,15 +32,32 @@ const Storage = (() => {
   }
 
   // ── Streak ───────────────────────────────────────────────
+  function _localDateStr(date) {
+    const d = date || new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }
+
   function getStreak() {
     try { return JSON.parse(localStorage.getItem(STREAK_KEY) || 'null') || { last: null, current: 0, max: 0 }; }
     catch { return { last: null, current: 0, max: 0 }; }
   }
 
+  // Verifica si la racha expiró (llamar al iniciar la app)
+  function checkStreak() {
+    const today     = _localDateStr();
+    const s         = getStreak();
+    if (!s.last || s.last === today) return;
+    const yesterday = _localDateStr(new Date(Date.now() - 86400000));
+    if (s.last !== yesterday) {
+      s.current = 0;
+      localStorage.setItem(STREAK_KEY, JSON.stringify(s));
+    }
+  }
+
   function _updateStreak() {
-    const today    = new Date().toISOString().slice(0, 10);
-    const s        = getStreak();
-    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const today     = _localDateStr();
+    const s         = getStreak();
+    const yesterday = _localDateStr(new Date(Date.now() - 86400000));
     if (s.last === today) return;
     if (s.last === yesterday) s.current += 1;
     else s.current = 1;
@@ -96,7 +113,7 @@ const Storage = (() => {
 
   return {
     getHistory, saveSession, getCount, getTotalPractices, getExploredCount,
-    getStreak,
+    getStreak, checkStreak,
     saveTheme, loadTheme,
     getUnlocked, unlockAchievement,
     exportData, importData,
