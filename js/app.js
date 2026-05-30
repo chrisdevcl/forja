@@ -94,7 +94,6 @@ function renderHome() {
   const header = el('div', 'home-header');
   const left   = el('div', 'header-left');
   left.innerHTML =
-    '<img src="brand/icon-96.png" class="header-logo" alt="Forja">' +
     '<div class="header-text">' +
       '<h1 class="home-title"><span class="brand">Forja</span></h1>' +
       '<p class="home-tagline">quien quieres ser</p>' +
