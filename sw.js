@@ -1,4 +1,4 @@
-const CACHE        = 'forja-v5';
+const CACHE        = 'forja-v6';
 const IMAGES_CACHE = 'forja-images-v1'; // Cache permanente para imágenes, sobrevive actualizaciones del app
 
 const PRECACHE = [
@@ -10,8 +10,14 @@ const PRECACHE = [
   './js/themes.js',
   './js/components.js',
   './js/app.js',
-  './favicon.svg',
   './manifest.json',
+  './brand/favicon.svg',
+  './brand/favicon.ico',
+  './brand/icon-192.png',
+  './brand/icon-512.png',
+  './brand/maskable-192.png',
+  './brand/maskable-512.png',
+  './brand/apple-touch-icon.png',
 ];
 
 // Instalación: precachear archivos del app

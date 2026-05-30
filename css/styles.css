@@ -143,7 +143,8 @@ body {
   padding: clamp(20px, 4vw, 40px) clamp(16px, 3vw, 40px) 18px;
 }
 
-.header-left { display: flex; align-items: center; gap: 12px; }
+.header-left { display: flex; align-items: center; gap: 10px; }
+.header-logo  { width: 50px; height: 50px; border-radius: 12px; flex-shrink: 0; }
 
 .header-text { display: flex; flex-direction: column; }
 

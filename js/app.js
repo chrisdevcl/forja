@@ -94,6 +94,7 @@ function renderHome() {
   const header = el('div', 'home-header');
   const left   = el('div', 'header-left');
   left.innerHTML =
+    '<img src="brand/icon-96.png" class="header-logo" alt="Forja">' +
     '<div class="header-text">' +
       '<h1 class="home-title"><span class="brand">Forja</span></h1>' +
       '<p class="home-tagline">quien quieres ser</p>' +
@@ -475,17 +476,29 @@ document.addEventListener('error', (e) => {
   }
 }, true);
 
+// ── Splash ─────────────────────────────────────────────────
+const SPLASH_DURATION = 1500;
+
+function showSplash() {
+  const s = document.getElementById('splash');
+  if (s) s.classList.remove('splash--hidden');
+  return Date.now();
+}
+
+function hideSplash(t0) {
+  const remaining = Math.max(0, SPLASH_DURATION - (Date.now() - t0));
+  setTimeout(() => {
+    const s = document.getElementById('splash');
+    if (s) s.classList.add('splash--hidden');
+  }, remaining);
+}
+
 // ── Init ───────────────────────────────────────────────────
+const _splashT0 = Date.now(); // el splash ya es visible desde el HTML
 Storage.checkStreak();
 renderHome();
 preloadAllImages();
-
-// Ocultar splash una vez que la app está lista
-const _splash = document.getElementById('splash');
-if (_splash) {
-  _splash.classList.add('splash--hidden');
-  _splash.addEventListener('transitionend', () => _splash.remove(), { once: true });
-}
+hideSplash(_splashT0);
 
 // ── Pull to refresh ────────────────────────────────────────
 (function () {
@@ -523,14 +536,12 @@ if (_splash) {
     pulling = false;
     const ind = getIndicator();
     if (ind.classList.contains('ptr-indicator--ready')) {
-      ind.classList.add('ptr-indicator--loading');
-      ind.style.transform = `translateY(${THRESHOLD}px)`;
+      ind.style.transform = '';
+      ind.classList.remove('ptr-indicator--ready', 'ptr-indicator--loading');
+      const t0 = showSplash();
       Storage.checkStreak();
       renderHome();
-      setTimeout(() => {
-        ind.style.transform = '';
-        ind.classList.remove('ptr-indicator--ready', 'ptr-indicator--loading');
-      }, 600);
+      hideSplash(t0);
     } else {
       ind.style.transform = '';
     }
