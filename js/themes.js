@@ -271,3 +271,15 @@ function getConceptDisplay(concept, size) {
 
   return `<span class="concept-emoji" style="${bgStyles[level]}">${emoji}</span>`;
 }
+
+// Versión compacta para listas (historial global, etc.) — sin glow, tamaño fijo
+function getConceptIconHtml(concept, px = 32) {
+  if (window._activeTheme === 'pokemon') {
+    const url = getPokemonUrl(concept.id);
+    if (url) return `<img class="concept-img concept-img--poke" src="${url}" alt="${concept.title}" width="${px}" height="${px}" loading="lazy" data-fallback="${concept.emoji}">`;
+  }
+  const emoji = window._activeTheme === 'animals'
+    ? (ANIMAL_MAP[concept.id] || concept.emoji)
+    : concept.emoji;
+  return `<span class="concept-emoji">${emoji}</span>`;
+}

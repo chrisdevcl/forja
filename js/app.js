@@ -361,17 +361,12 @@ function renderGlobalHistory() {
   const list = el('div', 'gh-list');
   entries.forEach(({ c, s }) => {
     const item = el('div', 'gh-item');
-    const emoji = window._activeTheme === 'animals'
-      ? (ANIMAL_MAP[c.id] || c.emoji)
-      : window._activeTheme === 'pokemon'
-        ? (ANIMAL_MAP[c.id] || c.emoji)  // fallback emoji en lista, imagen no aplica aquí
-        : c.emoji;
     const inputs = Object.values(s.inputs || {}).filter(v => v?.a || (typeof v === 'string' && v));
     const preview = inputs.length
       ? (inputs[0].a || inputs[0]).slice(0, 60)
       : '';
     item.innerHTML =
-      `<span class="gh-emoji">${emoji}</span>` +
+      `<span class="gh-emoji">${getConceptIconHtml(c, 32)}</span>` +
       `<div class="gh-info">` +
         `<span class="gh-concept">${c.title}</span>` +
         (preview ? `<span class="gh-preview">${preview}${preview.length >= 60 ? '…' : ''}</span>` : '') +
